@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 09 fév. 2024 à 08:50
+-- Généré le : ven. 09 fév. 2024 à 08:56
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `are_lestrelin`
+-- Base de données : `gestionstock`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +32,17 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `id_classe` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) NOT NULL,
   PRIMARY KEY (`id_classe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `classe`
+--
+
+INSERT INTO `classe` (`id_classe`, `libelle`) VALUES
+(1, 'TU'),
+(2, 'CPRP'),
+(3, 'CQPM'),
+(4, 'Fab Spé');
 
 -- --------------------------------------------------------
 
@@ -88,7 +98,17 @@ CREATE TABLE IF NOT EXISTS `fonction` (
   `id_fonction` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(100) NOT NULL,
   PRIMARY KEY (`id_fonction`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `fonction`
+--
+
+INSERT INTO `fonction` (`id_fonction`, `libelle`) VALUES
+(1, 'Professeur'),
+(2, 'Elève'),
+(3, 'DDFPT'),
+(4, 'Comptabilité');
 
 -- --------------------------------------------------------
 
