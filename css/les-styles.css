@@ -5,7 +5,7 @@
 	transition : 1000ms;
 	padding: 10px 50px;
 	transform : translateY(-0px);
-	background: linear-gradient(179deg, #ff5f03 0%, #ff5f03 100%);
+	background: linear-gradient(90deg, #ff5f03 0%, #ff5f03 100%);
 	color: #ffffff;
 	border: solid 2px #ffffff;
 }
@@ -105,4 +105,10 @@
 	align-items: center;
 	cursor: pointer;
 	text-transform: uppercase;
+}
+.scroll{
+	width: 350px;
+	height: 200px;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
 }
