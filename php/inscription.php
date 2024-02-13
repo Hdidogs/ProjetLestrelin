@@ -1,5 +1,5 @@
 <?php
-include 'User.php';
+include 'SQLConnexion.php';
 
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
@@ -10,12 +10,13 @@ $mail = $_POST['mail'];
 if ($remdp == $mdp) {
     $newmdp = password_hash($mdp,PASSWORD_DEFAULT);
 
-    $user = new User($nom, $prenom, $mail, $newmdp);
+    $user = new User(["nom"=>$nom, "prenom"=>$prenom, "mail"=>$mail, "mdp"=>$newmdp, "fonction"=>"Elève"]);
 
-    if ($user->checkIfMailExist($user)) {
+    var_dump($user->getFonctionId());
+    if ($user->checkIfMailExist()) {
         header("Location: ../html/inscription.html");
     } else {
-        $user->inscription($user);
+        $user->inscription();
     }
 } else {
     header("Location: ../html/inscription.html");

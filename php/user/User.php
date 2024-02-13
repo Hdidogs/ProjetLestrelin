@@ -1,17 +1,23 @@
 <?php
-include 'SQLConnexion.php';
-
 class User{
     private String $nom;
     private String $prenom;
     private String $mail;
     private String $mdp;
+    private String $fonction;
 
-    function __construct(String $nom, String $prenom, String $mail, String $mdp) {
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->mail = $mail;
-        $this->mdp = $mdp;
+    function __construct(array $info) {
+        $this->hydrate($info);
+    }
+
+    public function hydrate(array $donnees) {
+        foreach ($donnees as $key => $value) {
+            $method = 'set'.ucfirst($key);
+
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
     }
 
     public function getNom(): string
@@ -54,10 +60,29 @@ class User{
         $this->mdp = $mdp;
     }
 
-    public function connexion(User $u): bool {
-        $co = new SQLConnexion();
-        $res = $co->conbdd()->prepare("SELECT * FROM user WHERE mail = :mail");
-        $res->execute(['mail'=>$u->getMail()]);
+    public function getFonction(): string
+    {
+        return $this->fonction;
+    }
+
+    public function getFonctionId(): String {
+        $conn = new SQLConnexion();
+        $req = $conn->conbdd()->prepare("SELECT id_fonction FROM `fonction` WHERE libelle = :fonction");
+        $req->execute(["fonction"=>$this->fonction]);
+        $res = $req->fetch();
+
+        return $res['id_fonction'];
+    }
+
+    public function setFonction(String $fonction): void
+    {
+        $this->fonction = $fonction;
+    }
+
+    public static function CONNEXION($mail, $mdp) {
+        $conn = new SQLConnexion();
+        $res = $conn->conbdd()->prepare("SELECT * FROM user WHERE mail = :mail");
+        $res->execute(['mail'=>$mail]);
         $user = $res -> fetch();
 
         $id = $user['id_user'];
@@ -66,14 +91,13 @@ class User{
         $userprenom = $user['prenom'];
         $usermail = $user['mail'];
 
-        if (password_verify($u->getMdp(), $usermdp)) {
+        if (password_verify($mdp, $usermdp)) {
             session_start();
 
             $_SESSION['id_user'] = $id;
             $_SESSION['nom'] = $usernom;
             $_SESSION['prenom'] = $userprenom;
             $_SESSION['mail'] = $usermail;
-            $_SESSION['mdp'] = $usermdp;
 
             header("Location: ../html/index.php");
             return true;
@@ -83,10 +107,10 @@ class User{
         }
     }
 
-    public function inscription(User $u): bool {
+    public function inscription() {
         $co = new SQLConnexion();
-        $add_user = $co->conbdd()->prepare("INSERT INTO user (nom, prenom, mail, mdp) VALUES (:nom, :prenom, :mail, :mdp)");
-        $add_user->execute(['nom'=>$u->getNom(), 'prenom'=>$u->getPrenom(), 'mail'=>$u->getMail(), 'mdp' =>$u->getMdp()]);
+        $add_user = $co->conbdd()->prepare("INSERT INTO user (nom, prenom, mail, mdp, ref_fonction) VALUES (:nom, :prenom, :mail, :mdp, :fonction)");
+        $add_user->execute(['nom'=>$this->getNom(), 'prenom'=>$this->getPrenom(), 'mail'=>$this->getMail(), 'mdp' =>$this->getMdp(), 'fonction'=>$this->getFonctionId()]);
 
         $id_user = $co->conbdd()->lastInsertId();
 
@@ -94,24 +118,24 @@ class User{
             session_start();
 
             $_SESSION['id_user'] = $id_user;
-            $_SESSION['nom'] = $u->getNom();
-            $_SESSION['prenom'] = $u->getPrenom();
-            $_SESSION['mail'] = $u->getMail();
-            $_SESSION['mdp'] = $u->getMdp();
+            $_SESSION['nom'] = $this->getNom();
+            $_SESSION['prenom'] = $this->getPrenom();
+            $_SESSION['mail'] = $this->getMail();
+            $_SESSION['fonction'] = $this->getFonction();
 
             header("Location: ../html/index.php");
             return true;
         } else {
-            header("Location: ../html/inscription.php");
+            header("Location: ../html/inscription.html");
             return false;
         }
     }
 
-    public function checkIfMailExist(User $u): bool {
+    public function checkIfMailExist(): bool {
         $co = new SQLConnexion();
 
         $check_mail = $co->conbdd()->prepare("SELECT mail FROM user WHERE mail = :mail");
-        $check_mail->execute(['mail'=>$u->getMail()]);
+        $check_mail->execute(['mail'=>$this->getMail()]);
 
         $mail = $check_mail->fetch();
 
@@ -120,16 +144,5 @@ class User{
         } else {
             return false;
         }
-    }
-
-    public function checkIfUserEntreprise(User $u): array {
-        $co = new SQLConnexion();
-
-        $check_entreprise = $co->conbdd()->prepare("SELECT ref_entreprise FROM userentreprise WHERE ref_user = :user");
-        $check_entreprise->execute(['user'=>$_SESSION['id_user']]);
-
-        $entreprise = $check_entreprise->fetchAll();
-
-        return $entreprise;
     }
 }

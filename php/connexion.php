@@ -1,10 +1,8 @@
 <?php
-include 'User.php';
+include 'SQLConnexion.php';
 
 $mdp = $_POST['mdp'];
 $mail = $_POST['mail'];
 
-$user = new User(" ", " ", $mail, $mdp);
-
-$user->connexion($user);
+User::CONNEXION($mail, $mdp);
 ?>

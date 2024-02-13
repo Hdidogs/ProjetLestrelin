@@ -1,11 +1,11 @@
 <?php
-
+include "user/User.php";
 class SQLConnexion {
     public function conbdd(): PDO {
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $bddname = "are_2022";
+        $bddname = "gestionStock";
 
         try {
             $conn = new PDO("mysql:host=$servername;dbname=".$bddname, $username, $password);

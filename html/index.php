@@ -15,7 +15,7 @@
 </head>
 <body>
 <?php
-include '../php/User.php';
+include '../php/SQLConnexion.php';
 
 session_start();
 
@@ -24,16 +24,7 @@ if (isset($_SESSION['id_user'])) {
 } else {
     header("Location: ../html/connexion.html");
 }
-
-$user = new User($_SESSION['nom'], $_SESSION['prenom'], $_SESSION['mail'], $_SESSION['mdp']);
-
-if ($user->checkIfUserEntreprise($user)) {
-
-} else {
-    ?>
+ ?>
     <button>Salut</button>
-<?php
-}
-?>
 </body>
 </html>
