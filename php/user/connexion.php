@@ -1,5 +1,5 @@
 <?php
-include 'SQLConnexion.php';
+include '../SQLConnexion.php';
 
 $mdp = $_POST['mdp'];
 $mail = $_POST['mail'];

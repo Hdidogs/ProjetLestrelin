@@ -1,5 +1,5 @@
 <?php
-include 'SQLConnexion.php';
+include '../SQLConnexion.php';
 
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
@@ -15,11 +15,11 @@ if ($remdp == $mdp) {
 
     var_dump($user->getFonctionId());
     if ($user->checkIfMailExist()) {
-        header("Location: ../html/inscription.html");
+        header("Location: ../../html/inscription.html");
     } else {
         $user->inscription();
     }
 } else {
-    header("Location: ../html/inscription.html");
+    header("Location: ../../html/inscription.html");
 }
 ?>
