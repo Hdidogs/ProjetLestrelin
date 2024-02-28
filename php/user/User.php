@@ -114,7 +114,7 @@ class User{
 
         $id_user = $co->conbdd()->lastInsertId();
 
-        if ($id_user != null) {
+        if ($id_user) {
             session_start();
 
             $_SESSION['id_user'] = $id_user;
@@ -139,7 +139,7 @@ class User{
 
         $mail = $check_mail->fetch();
 
-        if ($mail['mail'] != null) {
+        if (is_array($mail['mail'])) {
             return true;
         } else {
             return false;

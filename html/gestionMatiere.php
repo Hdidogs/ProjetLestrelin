@@ -19,14 +19,14 @@
 include '../php/SQLConnexion.php';
 
 session_start();
+$conn = new SQLConnexion();
 
 if (isset($_SESSION['id_user'])) {
     $id_user = $_SESSION['id_user'];
 } else {
     header("Location: ../html/connexion.html");
 }
- ?>
-
+?>
 <div class="side-bar-big">
     <a href="gestionMatiere.php">Gestion des Matière</a>
     <a href="#">Gestion des Projets</a>
@@ -35,12 +35,41 @@ if (isset($_SESSION['id_user'])) {
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
 </div>
 
-<div class="side-bar-small">
-
+<div class="side-bar-action">
+    <a href="#">Ajouter</a>
+    <br>
+    <h4 class="side-bar-title">Trier</h4>
+    <a href="#">tt</a>
 </div>
 
 <div class="content">
-    <h1>Salut</h1>
+<?php
+$req = $conn->conbdd()->query("SELECT * FROM matiere");
+$res = $req->fetchAll();
+
+foreach ($res as $matiere) {
+    ?>
+    <div class="case">
+        <h5><?php
+            $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
+            $requete->execute(['id' => $matiere['ref_materiau']]);
+            $result = $requete->fetch();
+            $materiau = $result['libelle'];
+
+            $requete = $conn->conbdd()->prepare("SELECT libelle FROM forme WHERE id_forme = :id");
+            $requete->execute(['id' => $matiere['ref_forme']]);
+            $result = $requete->fetch();
+            $forme = $result['libelle'];
+
+            echo $forme . " en " . $materiau;
+            ?></h5>
+        <p><?= $matiere['longueur'] . "cm"?></p>
+        <a class="case-edit" href="#">Modifier</a>
+        <a class="case-delete" href="#">Supprimer</a>
+    </div>
+<?php
+}
+?>
 </div>
 </body>
 </html>

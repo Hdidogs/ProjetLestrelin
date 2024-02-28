@@ -71,26 +71,27 @@
  <div class="container">
  <h1 class="title">Gestion du stock</h1>
 
- <form method="POST" action="save_product.php">
+ <form method="POST" action="php/saveProduct.php">
  <label for="produit">Produit :</label>
  <?php
 
- include 'database_connection.php';
+ include 'php/SQLConnexion.php';
+$con = new SQLConnexion();
+$conn = $con->conbdd();
 
  // Récupérer les produits depuis la base de données
- $sql = "SELECT * FROM produits";
+ $sql = "SELECT * FROM matiere";
  $result = $conn->query($sql);
 
- if ($result->num_rows > 0) {
+ if ($result->rowCount() > 0) {
  echo '<select id="produit" name="produit">';
- while ($row = $result->fetch_assoc()) {
- echo '<option value="' . $row["id_produits"] . '">' . $row["produit"] . '</option>';
+ while ($row = $result->fetchAll()) {
+ echo '<option value="' . $row["id_matiere"] . '">' . $row["nom"] . '</option>';
  }
  echo '</select>';
  } else {
  echo "Aucun produit trouvé.";
  }
- $conn->close();
  ?>
 
  <div class="input-box">
@@ -112,15 +113,11 @@
 </html>
 
 <?php
-include 'database_connection.php';
-
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
  // Get the selected product, input text, and price
  $produit = $_POST["produit"];
  $inputText = $_POST["inputText"];
  $inputPrice = $_POST["inputPrice"];
-
- $conn->close();
 }
 ?>
