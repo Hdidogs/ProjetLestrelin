@@ -1,5 +1,6 @@
 <?php
-include '../SQLConnexion.php';
+
+include '../../SQLConnexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupère les données du formulaire ou assigne null si elles n'existent pas
@@ -15,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mkdir($target_dir, 0777, true);
             }
             $nouveauNom = $_POST['nouveauNom'];
-            $extension = pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+            $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             // Construit le chemin complet du fichier image
-            $imagePath = $target_dir . $nouveauNom . ".". $extension;
+            $imagePath = $target_dir . $nouveauNom . "." . $extension;
             // Tente de déplacer le fichier téléchargé vers le répertoire de destination
             if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
                 // Si le déplacement réussit, affiche un message de succès
@@ -35,4 +36,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->conbdd()->prepare("INSERT INTO projet (image,nom) VALUES (?,?)");
     $stmt->execute([$imagePath,$nouveauNom]);
     echo 'Image ajouté avec succès!';
+
+    $matiere = $_POST["choixMatiere"];
+    $projet = $_POST["projet"];
+    $nouveauNom = $_POST['nouveauNom'];
+
+
+
+    $stmt = $conn->conbdd()->prepare("SELECT m.id_matiere, m.nom, m.ref_materiau, m.ref_forme,m.longueur,m.hauteur,m.epaisseur,m.largeur,m.diametre,pr.id_projet	,pr.nom	,pr.image,pj.ref_piece,pj.ref_projet,p.img,p.nom,p.id_piece,mp.ref_matiere,mp.ref_piece FROM matiere as m 
+    INNER JOIN matierepiece as mp on mp.ref_matiere = m.id_matiere
+    INNER JOIN piece p on mp.ref_piece = p.id_piece  
+    INNER JOIN pieceprojet pj on pj.ref_piece = p.id_piece
+    INNER JOIN projet pr on pj.ref_projet = pr.id_projet
+    WHERE p.nom = ? and m.nom = ? and pr.nom = ?");
+    $stmt->execute(array($matiere,$projet,$nouveauNom));
+
 }
