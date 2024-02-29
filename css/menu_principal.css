@@ -106,9 +106,7 @@
 	cursor: pointer;
 	text-transform: uppercase;
 }
-.scroll{
-	width: 350px;
-	height: 200px;
+.scrolll{
 	overflow-y: scroll;
 	scroll-behavior: smooth;
 }
