@@ -45,7 +45,8 @@
     </ul>
 </nav>
 
-<input class="image" type="image" alt="visuelPiece" name="imagePiece" id="imagePiece" src="../assets/images/50-Lycee-Robert-Schuman.jpg" width="200" height="250" required>
+<img class="logo" src="../assets/images/50-Lycee-Robert-Schuman.jpg" alt="Logo" width="200" height="250" required>
+
 
 <div class="position"> Professeur :
     <select name="professeur" id="professeur-select" required>
