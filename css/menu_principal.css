@@ -1,112 +1,64 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
+﻿/* formulaire-moderne.css */
 
-.btn-orange:hover{
+.formulaire-moderne {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-	transition : 1000ms;
-	padding: 10px 50px;
-	transform : translateY(-0px);
-	background: linear-gradient(90deg, #ff5f03 0%, #ff5f03 100%);
-	color: #ffffff;
-	border: solid 2px #ffffff;
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
 }
-.btn-rouge:hover{
 
-	transition : 1000ms;
-	padding: 10px 50px;
-	transform : translateY(-0px);
-	background: linear-gradient(179deg, #ff0320 0%, #ff0320 100%);
-	color: #ffffff;
-	border: solid 2px #ffffff;
+select,
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
-.btn-vert:hover{
-	transition : 1000ms;
-	padding: 10px 50px;
-	transform : translateY(-0px);
-	background: linear-gradient(179deg, #0b8d03 0%, #0b8d03 100%);
-	color: #ffffff;
-	border: solid 2px #ffffff;
-}
-.btn-bleu:hover {
-	transition: 1000ms;
-	padding: 10px 50px;
-	transform: translateY(-0px);
-	background: linear-gradient(179deg, #0037ff 0%, #0037ff 100%);
-	color: #ffffff;
-	border: solid 2px #ffffff;
-}
-.btn-orange{
 
-	font-family: Roboto, sans-serif;
-	font-weight: 100;
-	font-size: 14px;
-	color: #fcfcfc;
-	background: linear-gradient(179deg, #ff5f03 0%, #ff5f03 100%);
-	padding: 10px 30px;
-	border: solid #ffffff 2px;
-	border-radius: 25px;
-	transition : 1000ms;
-	transform: translateY(0);
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	cursor: pointer;
-	text-transform: uppercase;
+button {
+    width: auto;
+    padding: 12px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
-.btn-rouge{
 
-	font-family: Roboto, sans-serif;
-	font-weight: 100;
-	font-size: 14px;
-	color: #fcfcfc;
-	background: linear-gradient(179deg, #ff0320 0%, #ff0320 100%);
-	padding: 10px 44px;
-	border: solid #ffffff 2px;
-	border-radius: 25px;
-	transition : 1000ms;
-	transform: translateY(0);
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	cursor: pointer;
-	text-transform: uppercase;
+.btn-orange {
+    background: linear-gradient(90deg, #ff5f03 0%, #ff5f03 100%);
 }
-.btn-vert{
 
-	font-family: Roboto, sans-serif;
-	font-weight: 100;
-	font-size: 14px;
-	color: #fcfcfc;
-	background: linear-gradient(179deg, #0b8d03 0%, #0b8d03 100%);
-	padding: 10px 48px;
-	border: solid #ffffff 2px;
-	border-radius: 25px;
-	transition : 1000ms;
-	transform: translateY(0);
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	cursor: pointer;
-	text-transform: uppercase;
+.btn-rouge {
+    background: linear-gradient(179deg, #ff0320 0%, #ff0320 100%);
 }
-.btn-bleu{
 
-	font-family: Roboto, sans-serif;
-	font-weight: 100;
-	font-size: 14px;
-	color: #fcfcfc;
-	background: linear-gradient(179deg, #0037ff 0%, #0037ff 100%);
-	padding: 10px 48px;
-	border: solid #ffffff 2px;
-	border-radius: 25px;
-	transition : 1000ms;
-	transform: translateY(0);
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	cursor: pointer;
-	text-transform: uppercase;
+.btn-vert {
+    background: linear-gradient(179deg, #0b8d03 0%, #0b8d03 100%);
 }
-.scrolll{
-	overflow-y: scroll;
-	scroll-behavior: smooth;
+
+.btn-bleu {
+    background: linear-gradient(179deg, #0037ff 0%, #0037ff 100%);
+}
+
+button:hover {
+    opacity: 1;
 }
