@@ -99,10 +99,10 @@ class User{
             $_SESSION['prenom'] = $userprenom;
             $_SESSION['mail'] = $usermail;
 
-            header("Location: ../html/index.php");
+            header("Location: ../../html/index.php");
             return true;
         } else {
-            header("Location: ../html/connexion.html");
+            header("Location: ../../html/connexion.html");
             return false;
         }
     }

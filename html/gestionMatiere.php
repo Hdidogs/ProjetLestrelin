@@ -64,12 +64,55 @@ foreach ($res as $matiere) {
             echo $forme . " en " . $materiau;
             ?></h5>
         <p><?= $matiere['longueur'] . "cm"?></p>
-        <a class="case-edit" href="#">Modifier</a>
-        <a class="case-delete" href="#">Supprimer</a>
+        <input type="hidden" name="id" value="<?=$matiere['id_matiere']?>">
+        <a id="btn-edit" onclick="afficher(<?=$matiere['id_matiere']?>)" class="case-edit">Modifier</a>
+        <a id="btn-delete" class="case-delete" href="#">Supprimer</a>
     </div>
 <?php
 }
 ?>
 </div>
+
+<div id="modal-edit" class="modal">
+    <form method="get" action="../php/matiere/editMatiere.php">
+        <div class="modal-header">
+            <h1>Bienvenue</h1>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-content">
+            <p>test</p>
+            <!-- <script>
+                document.write("id : " +   id);
+             </script> -->
+        </div>
+        <div class="modal-footer">
+            <button type="reset">Réinitialiser</button>
+            <button type="submit">Modifier</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var modal = document.getElementById("modal-edit");
+
+    var id = 0;
+
+    var span = document.getElementsByClassName("close")[0];
+
+    function afficher(id) {
+        modal.style.display = "block";
+        this.id = id;
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
