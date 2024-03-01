@@ -128,8 +128,6 @@ $resProjet = $req->fetchAll();
     var modalProjet = document.getElementById("modal-add-projet");
     var modalPiece = document.getElementById("modal-add-piece");
 
-    var id;
-
     var span = document.getElementsByClassName("close")[0];
     var spanPiece = document.getElementsByClassName("close-piece")[0];
 
