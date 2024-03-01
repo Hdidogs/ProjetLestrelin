@@ -96,7 +96,7 @@ foreach ($res as $matiere) {
 
 <script type="text/javascript">
     var modal = document.getElementById("modal-edit");
-    
+
     var span = document.getElementsByClassName("close")[0];
 
     function afficher(id) {
