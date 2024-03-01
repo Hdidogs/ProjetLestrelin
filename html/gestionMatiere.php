@@ -42,7 +42,7 @@ if (isset($_SESSION['id_user'])) {
     <h4 class="side-bar-title">Trier</h4>
     <a href="#">tt</a>
 </div>
-
+    
 <div class="content">
 <?php
 $req = $conn->conbdd()->query("SELECT * FROM matiere");
