@@ -99,7 +99,7 @@ class User{
             $_SESSION['prenom'] = $userprenom;
             $_SESSION['mail'] = $usermail;
 
-            header("Location: ../../html/index.php");
+            header("Location: ../../html/gestionMatiere.php");
             return true;
         } else {
             header("Location: ../../html/connexion.html");
@@ -123,10 +123,11 @@ class User{
             $_SESSION['mail'] = $this->getMail();
             $_SESSION['fonction'] = $this->getFonction();
 
-            header("Location: ../html/index.php");
+            var_dump($id_user);
+            header("Location: ../../html/index.php");
             return true;
         } else {
-            header("Location: ../html/inscription.html");
+            header("Location: ../../html/inscription.html");
             return false;
         }
     }
@@ -139,7 +140,7 @@ class User{
 
         $mail = $check_mail->fetch();
 
-        if (is_array($mail['mail'])) {
+        if ($mail!=null) {
             return true;
         } else {
             return false;

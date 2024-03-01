@@ -32,7 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     $conn = new SQLConnexion();
-    $stmt = $conn->conbdd()->prepare("INSERT INTO projet (image,nom) VALUES (?,?)");
-    $stmt->execute([$imagePath,$nouveauNom]);
-    echo 'Image ajouté avec succès!';
+
+    $stmt = $conn-> conbdd()->prepare("INSERT INTO projet (img, nom) VALUES (:img, :nom)");
+    $stmt->execute(["img"=>$imagePath, "nom"=>$nouveauNom]);
+
+    header("Location: ../../html/gestionProjet.php");
 }
