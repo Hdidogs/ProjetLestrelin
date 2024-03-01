@@ -16,6 +16,7 @@
 </head>
 <body>
 <?php
+
 include '../php/SQLConnexion.php';
 
 session_start();
@@ -49,6 +50,7 @@ $res = $req->fetchAll();
 
 foreach ($res as $matiere) {
     ?>
+    
     <div class="case">
         <h5><?php
             $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");

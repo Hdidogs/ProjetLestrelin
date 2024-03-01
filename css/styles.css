@@ -36,7 +36,6 @@ body {
     color: black;
     padding: 16px;
     text-decoration: none;
-    cursor: pointer;
 }
 
 /* Side Bar button passage souris angle arrondis côté droit & changement de couleur */
@@ -128,7 +127,6 @@ div.content {
     margin-bottom: 10px;
     width: 220px;
     background-color: #fff;
-    text-align: center;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -174,8 +172,8 @@ div.content {
     display: none;
     position: fixed;
     z-index: 1;
-    width: 400px;
-    height: 400px;
+    width: auto;
+    height: auto;
     overflow: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -185,7 +183,7 @@ div.content {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.close, .close-piece {
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -193,9 +191,7 @@ div.content {
 }
 
 .close:hover,
-.close:focus,
-.close-piece:hover,
-.close-piece:focus{
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;

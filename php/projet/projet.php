@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     $conn = new SQLConnexion();
+
     $stmt = $conn-> conbdd()->prepare("INSERT INTO projet (img, nom) VALUES (:img, :nom)");
     $stmt->execute(["img"=>$imagePath, "nom"=>$nouveauNom]);
 

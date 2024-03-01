@@ -1,122 +1,74 @@
-﻿html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
-html,body
-{
-	font-family:Calibri,Verdana,sans-serif;
-	font-size:15px;
-	line-height:1.5;
-	background-color:#fcfcfc;
-	color:#666;
-	padding:0px;
-	margin:0px;
-}
-html{overflow-x:hidden}
+﻿/* Ajoutez ce CSS à votre fichier formulaire-moderne.css */
 
-#auCentre
-{
-	width:600px;
-	margin: 80px auto auto;
+.formulaire-moderne {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-#entete
-{
-	width:100%;
-	text-align:center;
-	font-size:14px;
-	margin-top:20px;
-	min-height:40px;
-	height:auto;
-	padding-top:15px;
-	border-top:#666 2px solid;
-	background: linear-gradient(#999, #fcfcfc);
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
 }
 
-#pied
-{
-	width:100%;
-	position:fixed;
-	bottom:0px;
-	font-size:14px;
-	padding-top:10px;
-	background-position:right center;
-	padding-right:0px;
-	background-image:url("../assets/image/ImageRobertSchuman.jpg");
-	background-repeat: no-repeat;
-	background-position:right center;
+select,
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
-#contenu
-{
-	width:80%;
-	height:480px;
-	background: linear-gradient(#edeeee, #fff);
-	border:#666 2px solid;
-	border-radius:35px;
-	margin:auto;
-	box-shadow: 0px 0px 3px 3px #666;	
+button {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#conteneur
-{
-	width:100%;
-	text-align:center;
-	margin-top:20px;
+.btn-orange {
+    background: linear-gradient(90deg, #ff5f03 0%, #ff5f03 100%);
 }
 
-#btn
-{
-	position:absolute;
-	left:3%;
-	top:200px;
+.btn-rouge {
+    background: linear-gradient(179deg, #ff0320 0%, #ff0320 100%);
 }
 
-.rond
-{
-	width:45px;
-	height:45px;
-	border-radius:50%;
-	margin:auto;
+.btn-vert {
+    background: linear-gradient(179deg, #0b8d03 0%, #0b8d03 100%);
 }
 
-.btnMenu
-{
-	 width:220px;
-	 height:40px;
-	 margin-left:12px;
-	 margin-right:12px;
-	 font-weight:bold;
-     color: #ccc;
-	 font-weight:bold;
-     background: #444;
-     background: linear-gradient( #555, #2C2C2C);
-     box-shadow: 0 0 10px rgba( 0, 0, 0, 0.8),
-                 0 -1px 0 rgba( 255, 255, 255, 0.6);	
-	
-	box-shadow: 2px 2px 0px #aaa;
-	font-size:14px;
-	text-align:center;	
-	padding-left:0px;	
+.btn-bleu {
+    background: linear-gradient(179deg, #0037ff 0%, #0037ff 100%);
 }
 
-.btnMenu:hover
-{
-	cursor:pointer;
-	box-shadow: 6px 6px 0px #aaa;	
+button:hover {
+    opacity: 1;
+    transform: translateY(-5px); /* Translation vers le haut au survol */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Effet d'ombre au survol */
 }
 
-.calque
-{
-	width:100%;
-	text-align:center;
-	font-size:24px;
-	font-weight:bold;
-	margin-top:20px;
-	height:50px;
-	padding-top:4px;
-	background-color:#edeeee;
-	color:#2b579a;
-	border-top:#666 2px solid;
-	border-bottom:#666 2px solid;
-	background-image:url("../assets/image/ImageRobertSchuman.jpg");
-	background-repeat: no-repeat;
-	background-position:3% center;
+h2 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
 }
