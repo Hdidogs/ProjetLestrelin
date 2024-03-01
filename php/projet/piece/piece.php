@@ -1,5 +1,6 @@
 <?php
-include '../SQLConnexion.php';
+
+include '../../SQLConnexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupère les données du formulaire ou assigne null si elles n'existent pas
@@ -15,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mkdir($target_dir, 0777, true);
             }
             $nouveauNom = $_POST['nouveauNom'];
-            $extension = pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+            $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             // Construit le chemin complet du fichier image
-            $imagePath = $target_dir . $nouveauNom . ".". $extension;
+            $imagePath = $target_dir . $nouveauNom . "." . $extension;
             // Tente de déplacer le fichier téléchargé vers le répertoire de destination
             if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
                 // Si le déplacement réussit, affiche un message de succès
@@ -32,8 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     $conn = new SQLConnexion();
-    $stmt = $conn-> conbdd()->prepare("INSERT INTO projet (img, nom) VALUES (:img, :nom)");
-    $stmt->execute(["img"=>$imagePath, "nom"=>$nouveauNom]);
 
-    header("Location: ../../html/gestionProjet.php");
+    $stmt = $conn->conbdd()->prepare("INSERT INTO piece (img, nom) VALUES (:img, :nom)");
+    $stmt->execute(["img" => $imagePath, "nom" => $nouveauNom]);
+
+    $piece = $conn->conbdd()->lastInsertId();
+
+    $stmt = $conn->conbdd()->prepare("INSERT INTO pieceprojet (ref_piece, ref_projet) VALUES (:piece, :projet)");
+    $stmt->execute(["piece" => $piece, "projet" => $_POST['projet']]);
+
+    $stmt = $conn->conbdd()->prepare("INSERT INTO matierepiece (ref_piece, ref_matiere) VALUES (:piece, :matiere)");
+    $stmt->execute(["piece" => $piece, "matiere" => $_POST['matiere']]);
+
+    header("Location: ../../../html/gestionProjet.php");
 }
+?>
