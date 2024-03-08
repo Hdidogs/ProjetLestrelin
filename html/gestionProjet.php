@@ -44,18 +44,18 @@ $resProjet = $req->fetchAll();
 
 </div>
 
-<div id="modal-add-projet" class="modal">
+<div id="modal-add-projet" class="modal" style="max-height: 400px; overflow-y: auto;">
     <form action="../php/projet/projet.php" method="post" enctype="multipart/form-data">
         <div class="modal-header">
             <h1>Ajouter un Projet</h1>
             <span class="close">&times;</span>
         </div>
-        <div class="modal-content">
+        <div class="modal-content modal-content-scrollable">
             <label for="imageProjet">Image:</label>
             <input type="file" id="imageProjet" name="image" accept=".jpeg, .jpg, .png, .jifi" onchange="previewImage('previewProjet')" required>
             <img id="previewProjet" alt="Image Preview">
             <br>
-            <input type="text" name="nouveauNom" placeholder="Nom de du projet" required>
+            <input type="text" name="nouveauNom" placeholder="Nom du projet" required>
         </div>
         <div class="modal-footer">
             <button type="reset">Réinitialiser</button>
