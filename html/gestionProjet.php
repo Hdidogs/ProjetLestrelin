@@ -51,9 +51,9 @@ $resProjet = $req->fetchAll();
             <span class="close">&times;</span>
         </div>
         <div class="modal-content">
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" accept=".jpeg, .jpg, .png, .jifi" onchange="previewImage()" required>
-            <img id="preview" alt="Image Preview">
+            <label for="imageProjet">Image:</label>
+            <input type="file" id="imageProjet" name="image" accept=".jpeg, .jpg, .png, .jifi" onchange="previewImage('previewProjet')" required>
+            <img id="previewProjet" alt="Image Preview">
             <br>
             <input type="text" name="nouveauNom" placeholder="Nom de du projet" required>
         </div>
@@ -64,7 +64,7 @@ $resProjet = $req->fetchAll();
     </form>
 </div>
 
-<div id="modal-add-piece" class="modal">
+<div id="modal-add-piece" class="modal" style="max-height: 400px; overflow-y: auto;">
     <form action="../php/projet/piece/piece.php" method="post" enctype="multipart/form-data">
         <div class="modal-header">
             <h1>Ajouter une Pièce</h1>
@@ -73,9 +73,9 @@ $resProjet = $req->fetchAll();
         <div class="modal-content">
             <input type="text" name="nouveauNom" placeholder="Nom de la pièce" required>
             <br>
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" accept=".jpeg, .jpg, .png, .jifi" onchange="previewImage()" required>
-            <img id="preview" alt="Image Preview">
+            <label for="imagePiece">Image:</label>
+            <input type="file" id="imagePiece" name="image" accept=".jpeg, .jpg, .png, .jifi" onchange="previewImage('previewPiece')" required>
+            <img id="previewPiece" alt="Image Preview">
             <select name="matiere" required>
                 <?php
                 $req = $conn->conbdd()->query("SELECT * FROM matiere");
@@ -113,7 +113,7 @@ $resProjet = $req->fetchAll();
     </form>
 </div>
 
-<div class="content">
+<div class="content" style="">
     <?php
     foreach ($resProjet as $projet) {
     ?>
@@ -155,9 +155,10 @@ $resProjet = $req->fetchAll();
         }
     }
 
-    function previewImage() {
-        var preview = document.getElementById('preview');
-        var fileInput = document.getElementById('image');
+    function previewImage(previewId) {
+        var preview = document.getElementById(previewId);
+        var fileInput = document.getElementById(previewId === 'previewProjet' ? 'imageProjet' : 'imagePiece');
+
         var file = fileInput.files[0];
 
         var reader = new FileReader();
@@ -177,4 +178,3 @@ $resProjet = $req->fetchAll();
 </script>
 </body>
 </html>
-
