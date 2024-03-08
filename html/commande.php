@@ -7,10 +7,15 @@ $req = $conn->conbdd()->query("SELECT * FROM user WHERE ref_fonction = 1");
 $professeur = $req->fetchAll();
 $req = $conn->conbdd()->query("SELECT * FROM classe");
 $classe = $req->fetchAll();
-$req = $conn->conbdd()->query("SELECT * FROM matierecommande");
+$req = $conn->conbdd()->query("SELECT * FROM matierefournisseur");
 $nposte = $req->fetchAll();
 ?>
 <html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
 <body>
 <form action="../php/commande/commande.php" method="post" enctype="multipart/form-data">
 
@@ -18,7 +23,7 @@ $nposte = $req->fetchAll();
             <label for="exampleFormControlSelect1">Fournisseur :</label>
             <select name="fournisseur">
                 <option><?php foreach ($fournisseur as $liste): ?>
-                <option value="<?php echo $liste['id_fournisseur']; ?>"><?php echo $liste['mail']; ?></option>
+                <option value="<?php echo $liste['mail']; ?>"><?php echo $liste['mail']; ?></option>
                 <?php endforeach;?>
             </select>
         </div>
@@ -45,9 +50,27 @@ $nposte = $req->fetchAll();
         <div class="form-group">
             <label for="exampleFormControlSelect1">N°Poste :</label>
             <select class="js-example-basic-multiple" name="states[]" multiple="multiple" name="numeroP">
-                <option><?php foreach ($nposte as $liste): ?>
-                <option value="<?php echo $liste['id_matierecommande']; ?>"><?php echo $liste['prix']; ?><?php echo $liste['quantite']; ?></option>
-                <?php endforeach;?>
+                <?php foreach ($nposte as $liste) {
+                    $req = $conn->conbdd()->prepare("SELECT ref_materiau, ref_forme FROM matiere WHERE id_matiere = :id");
+                    $req->execute(["id"=>$liste['ref_matiere']]);
+
+                    $res = $req->fetch();
+
+                    $id_materiau = $res['ref_materiau'];
+                    $id_forme = $res['ref_forme'];
+
+                    $req = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
+                    $req->execute(['id'=>$id_materiau]);
+
+                    $resMateriau = $req->fetch();
+
+                    $req = $conn->conbdd()->prepare("SELECT libelle FROM forme WHERE id_forme = :id");
+                    $req->execute(['id'=>$id_forme]);
+
+                    $resForme = $req->fetch();
+                    ?>
+                <option value="<?php echo $liste['ref_matiere']; ?>"><?= $resForme['libelle'] . " en " . $resMateriau['libelle'] . " - " . $liste['prix']?></option>
+                <?php }?>
             </select>
         </div>
 

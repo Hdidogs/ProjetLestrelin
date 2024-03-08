@@ -1,44 +1,51 @@
 <?php
-use Aspose\Words\WordsApi;
-use Aspose\Words\Model\Requests\{ConvertDocumentRequest};
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-require 'vendor/autoload.php';
 
-$wordsApi = new WordsApi('####-####-####-####-####', '##################');
-
-$doc = "../../html/commande.php";
-$request = new ConvertDocumentRequest(
-    $doc, "pdf", NULL, NULL, NULL, NULL
-);
-$convert = $wordsApi->convertDocument($request);
+require '../../vendor/autoload.php';
 
 $mail = new PHPMailer(true);
 
 try {
-
+var_dump($_POST["fournisseur"]);
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth = true;                                   //Enable SMTP authentication
     $mail->Username = 'mrlestrelin0@gmail.com';                     //SMTP username
-    $mail->Password = 'Lestrelin0!';                               //SMTP password
+    $mail->Password = 'gzqzsuayjipgnecr';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
+    // Vérifie si les variables POST sont définies et non vides
+    if(isset($_POST['fournisseur'])) {
+        // Vérifie si les adresses e-mail sont au bon format
+        if(filter_var($_POST['fournisseur'], FILTER_VALIDATE_EMAIL)) {
+            $mail->addAddress($_POST['fournisseur']);
+        } else {
+            echo 'Adresse e-mail invalide.';
+            // Arrête l'exécution du script si les adresses e-mail sont invalides
+            exit();
+        }
+    } else {
+        echo 'Les adresses e-mail ne sont pas définies.';
+        // Arrête l'exécution du script si les adresses e-mail ne sont pas définies
+        exit();
+    }
+
     //Recipients
-    $mail->setFrom("mrlestrelin@gmail.com", 'Lestrelin');
+    $mail->setFrom("mrlestrelin0@gmail.com", 'Lestrelin');
     $mail->addAddress($_POST['fournisseur']);     //Add a recipient
-    $mail->addAddress($_POST['mailDDFPT']);  //Name is optional
+    $mail->addAddress('mrlestrelin0@gmail.com');  //Name is optional
     $mail->addAddress('mrlestrelin@gmail.com');
-    $mail->addReplyTo('mrlestrelin@gmail.com', 'Lestrelin');
+    $mail->addReplyTo('mrlestrelin0@gmail.com', 'Lestrelin');
 
     //Attachments
-    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
