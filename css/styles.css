@@ -122,9 +122,18 @@ div.content {
         margin-left: 11%;
     }
 }
+
 .content {
     display: flex;
     flex-wrap: wrap;
+}
+
+.case img {
+    width: 50%;
+    height: auto;
+    display:block;
+    margin-left:auto;
+    margin-right: auto;
 }
 
 .case {
