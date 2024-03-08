@@ -136,6 +136,7 @@ div.content {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: inline-block;
+<<<<<<< HEAD
     margin-right: 12px;
     display: flex;
     flex-wrap: wrap;
@@ -143,6 +144,8 @@ div.content {
     align-items: center;
     width: 100%;
     height: 100%;
+=======
+>>>>>>> 841a652c680be0ded5a21778631d280409b5b0e9
 }
 
 
@@ -197,7 +200,7 @@ div.content {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.close {
+.close, .close-ajouter, .close-piece, .close-supprimer {
     color: #aaa;
     float: right;
     font-size: 28px;

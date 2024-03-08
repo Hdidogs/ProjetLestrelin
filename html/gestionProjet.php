@@ -33,7 +33,7 @@ $resProjet = $req->fetchAll();
 <div class="side-bar-big">
     <a href="gestionMatiere.php">Gestion des Matière</a>
     <a href="gestionProjet.php">Gestion des Projets</a>
-    <a href="#">Débit de Matière</a>
+    <a href="debitMatiere.php">Débit de Matière</a>
     <a href="#">Commande de Matière</a>
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
 </div>

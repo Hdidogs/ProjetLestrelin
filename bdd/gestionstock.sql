@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 01 mars 2024 à 10:10
+-- Généré le : ven. 08 mars 2024 à 08:10
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -147,6 +147,7 @@ CREATE TABLE IF NOT EXISTS `fournisseur` (
   `id_fournisseur` int NOT NULL AUTO_INCREMENT,
   `entreprise` varchar(200) NOT NULL,
   `mail` varchar(150) NOT NULL,
+  `telephone` varchar(100) NOT NULL,
   PRIMARY KEY (`id_fournisseur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -220,6 +221,21 @@ CREATE TABLE IF NOT EXISTS `matierecommande` (
   `quantite` int NOT NULL,
   PRIMARY KEY (`ref_matiere`,`ref_commande`),
   KEY `fk_piececommande_commande` (`ref_commande`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `matierefournisseur`
+--
+
+DROP TABLE IF EXISTS `matierefournisseur`;
+CREATE TABLE IF NOT EXISTS `matierefournisseur` (
+  `ref_matiere` int NOT NULL,
+  `ref_fournisseur` int NOT NULL,
+  `prix` int NOT NULL,
+  PRIMARY KEY (`ref_matiere`,`ref_fournisseur`),
+  KEY `fk_matierefournisseur_fournisseur` (`ref_fournisseur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -381,6 +397,13 @@ ALTER TABLE `matiere`
 ALTER TABLE `matierecommande`
   ADD CONSTRAINT `fk_piececommande_commande` FOREIGN KEY (`ref_commande`) REFERENCES `commande` (`id_commande`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_piececommande_piece` FOREIGN KEY (`ref_matiere`) REFERENCES `matiere` (`id_matiere`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `matierefournisseur`
+--
+ALTER TABLE `matierefournisseur`
+  ADD CONSTRAINT `fk_matierefournisseur_fournisseur` FOREIGN KEY (`ref_fournisseur`) REFERENCES `fournisseur` (`id_fournisseur`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_matierefournisseur_matiere` FOREIGN KEY (`ref_matiere`) REFERENCES `matiere` (`id_matiere`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Contraintes pour la table `matierepiece`
