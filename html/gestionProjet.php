@@ -119,7 +119,7 @@ $resProjet = $req->fetchAll();
     ?>
     <div class="case" onclick="">
         <h5><?=$projet["nom"]?></h5>
-        <img src="projetLestrelin/<?= $projet["img"]?>" style="width: 50%; height: 50%">
+        <img src="projetLestrelin/<?= $projet["img"]?>">
     </div>
     <?php }?>
 </div>
