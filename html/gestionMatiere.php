@@ -16,7 +16,6 @@
 </head>
 <body>
 <?php
-
 include '../php/SQLConnexion.php';
 
 session_start();

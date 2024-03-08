@@ -36,7 +36,16 @@ class Matiere {
 
     public function supprimer() {
         $conn = new SQLConnexion();
-        $req = $conn->conbdd()->prepare("DELETE FROM matiere WHERE ref_matiere = :id");
+        $req = $conn->conbdd()->prepare("DELETE FROM debit WHERE ref_matiere = :id");
+        $req->execute(["id"=>$this->getId()]);
+
+        $req = $conn->conbdd()->prepare("DELETE FROM matierecommande WHERE ref_matiere = :id");
+        $req->execute(["id"=>$this->getId()]);
+
+        $req = $conn->conbdd()->prepare("DELETE FROM matierefournisseur WHERE ref_matiere = :id");
+        $req->execute(["id"=>$this->getId()]);
+
+        $req = $conn->conbdd()->prepare("DELETE FROM matierepiece WHERE ref_matiere = :id");
         $req->execute(["id"=>$this->getId()]);
 
         $req = $conn->conbdd()->prepare("DELETE FROM matiere WHERE id_matiere = :id");
