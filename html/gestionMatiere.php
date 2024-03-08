@@ -43,7 +43,7 @@ if (isset($_SESSION['id_user'])) {
     <br>
     <h4 class="side-bar-title">Trier</h4>
 </div>
-
+    
 <div class="content">
 <?php
 $req = $conn->conbdd()->query("SELECT * FROM matiere");
@@ -52,8 +52,8 @@ $res = $req->fetchAll();
 foreach ($res as $matiere) {
     ?>
     
-    <div class="case">
-        <h5><?php
+    <div class="case card">
+        <h5 class="card-title"><?php
             $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
             $requete->execute(['id' => $matiere['ref_materiau']]);
             $result = $requete->fetch();
@@ -66,15 +66,16 @@ foreach ($res as $matiere) {
 
             echo $forme . " en " . $materiau;
             ?></h5>
-        <p><?= $matiere['longueur'] . "cm"?></p>
+        <p class="card-text"><?= $matiere['longueur'] . "Cm"?></p>
         <input type="hidden" name="id" value="<?=$matiere['id_matiere']?>">
+
         <a id="btn-edit" onclick="afficher(<?=$matiere['id_matiere']?>)" class="case-edit">Modifier</a>
         <a id="btn-delete" onclick="afficherSupprimer(<?=$matiere['id_matiere']?>)" class="case-delete">Supprimer</a>
     </div>
 <?php
 }
 ?>
-</div>z
+</div>
 
 <!-- Modals -->
 <!-- Supprimer/Modifier -->
@@ -158,6 +159,11 @@ foreach ($res as $matiere) {
         modal.style.display = "block";
 
         $("#modifId").val(id)
+
+        // Centrer la pop-up au milieu de l'écran
+        modal.style.transform = "translate(-50%, -50%)";
+        modal.style.top = "50%";
+        modal.style.left = "50%";
     }
 
     function afficherSupprimer(id) {
