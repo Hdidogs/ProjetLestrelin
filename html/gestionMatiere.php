@@ -37,10 +37,10 @@ if (isset($_SESSION['id_user'])) {
 </div>
 
 <div class="side-bar-action">
-    <a href="#">Ajouter</a>
-    <br>
-    <h4 class="side-bar-title">Trier</h4>
-    <a href="#">tt</a>
+    <a href="ajoutMatiere.php">Ajouter</a>
+    <a href="#">Projet</a>
+    <a href="#">Rechercher</a>
+    <a href="#">Trier</a>
 </div>
     
 <div class="content">
