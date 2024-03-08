@@ -31,18 +31,19 @@ if (isset($_SESSION['id_user'])) {
 <div class="side-bar-big">
     <a href="gestionMatiere.php">Gestion des Matière</a>
     <a href="gestionProjet.php">Gestion des Projets</a>
-    <a href="#">Débit de Matière</a>
+    <a href="debitMatiere.php">Débit de Matière</a>
     <a href="#">Commande de Matière</a>
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
 </div>
 
 <div class="side-bar-action">
-    <a href="#">Ajouter</a>
+    <a>Ajouter Matière</a>
+    <a>Nouvelle Forme</a>
+    <a>Nouveau Matériau</a>
     <br>
     <h4 class="side-bar-title">Trier</h4>
-    <a href="#">tt</a>
 </div>
-
+    
 <div class="content">
 <?php
 $req = $conn->conbdd()->query("SELECT * FROM matiere");
@@ -51,8 +52,8 @@ $res = $req->fetchAll();
 foreach ($res as $matiere) {
     ?>
     
-    <div class="case">
-        <h5><?php
+    <div class="case card">
+        <h5 class="card-title"><?php
             $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
             $requete->execute(['id' => $matiere['ref_materiau']]);
             $result = $requete->fetch();
@@ -65,55 +66,131 @@ foreach ($res as $matiere) {
 
             echo $forme . " en " . $materiau;
             ?></h5>
-        <p><?= $matiere['longueur'] . "cm"?></p>
+        <p class="card-text"><?= $matiere['longueur'] . "Cm"?></p>
         <input type="hidden" name="id" value="<?=$matiere['id_matiere']?>">
+
         <a id="btn-edit" onclick="afficher(<?=$matiere['id_matiere']?>)" class="case-edit">Modifier</a>
-        <a id="btn-delete" class="case-delete" href="#">Supprimer</a>
+        <a id="btn-delete" onclick="afficherSupprimer(<?=$matiere['id_matiere']?>)" class="case-delete">Supprimer</a>
     </div>
 <?php
 }
 ?>
 </div>
 
+<!-- Modals -->
+<!-- Supprimer/Modifier -->
+
 <div id="modal-edit" class="modal">
-    <form method="get" action="../php/matiere/editMatiere.php">
+    <form method="get" action="../php/matiere/traitementMatiere.php">
         <div class="modal-header">
-            <h1>Bienvenue</h1>
+            <h1>Modifier</h1>
             <span class="close">&times;</span>
         </div>
 
-        <input id="modifId" name="id">
+        <input id="modifId" name="id" >
         <div class="modal-content">
-            <p>test
-
-                t t
-            </p>
+            <p>test</p>
         </div>
         <div class="modal-footer">
             <button type="reset">Réinitialiser</button>
-            <button type="submit">Modifier</button>
+            <button name="edit" type="submit">Modifier</button>
+        </div>
+    </form>
+</div>
+
+<div id="modal-suppr" class="modal">
+    <form method="get" action="../php/matiere/traitementMatiere.php">
+        <div class="modal-header">
+            <h1>Supprimer</h1>
+            <span class="close-supprimer">&times;</span>
+        </div>
+
+        <input type="hidden" id="supprId" name="id" >
+        <div class="modal-content">
+            <p>Êtes vous sûr de vouloir supprimer cette matière ?
+            Seul supprimeras en même temps toute historique lier a cette matière !</p>
+        </div>
+        <div class="modal-footer">
+            <button class="close" type="button">Non</button>
+            <button name="suppr" type="submit">Oui</button>
+        </div>
+    </form>
+</div>
+
+<!-- Ajouter -->
+
+<div id="modal-ajouter" class="modal">
+    <form method="get" action="../php/matiere/traitementMatiere.php">
+        <div class="modal-header">
+            <h1>Ajouter</h1>
+            <span class="close-ajouter">&times;</span>
+        </div>
+        <div class="modal-content">
+            <select>
+                <?php
+                $req = $conn->conbdd()->query("SELECT * FROM materiau");
+                $res = $req->fetchAll();
+
+                foreach ($res as $materiau) {
+                ?>
+                <option><?=$materiau['libelle']?></option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button type="reset">Réinitialiser</button>
+            <button name="add" type="submit">Ajouter</button>
         </div>
     </form>
 </div>
 
 <script type="text/javascript">
     var modal = document.getElementById("modal-edit");
+    var modalAjouter = document.getElementById("modal-edit");
+    var modalSupprimer = document.getElementById("modal-suppr");
 
     var span = document.getElementsByClassName("close")[0];
+    var spanAjouter = document.getElementsByClassName("close-ajouter")[0];
+    var spanSupprimer = document.getElementsByClassName("close-supprimer")[0];
 
     function afficher(id) {
         modal.style.display = "block";
 
         $("#modifId").val(id)
+
+        // Centrer la pop-up au milieu de l'écran
+        modal.style.transform = "translate(-50%, -50%)";
+        modal.style.top = "50%";
+        modal.style.left = "50%";
+    }
+
+    function afficherSupprimer(id) {
+        modalSupprimer.style.display = "block";
+
+        $("#supprId").val(id)
     }
 
     span.onclick = function() {
         modal.style.display = "none";
     }
 
+    spanAjouter.onclick = function() {
+        modalAjouter.style.display = "none";
+    }
+
+    spanSupprimer.onclick = function() {
+        modalSupprimer.style.display = "none";
+    }
+
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+        } else if (event.target == modalSupprimer) {
+            modalSupprimer.style.display = "none";
+        } else if (event.target == modalAjouter) {
+            modalAjouter.style.display = "none";
         }
     }
 </script>

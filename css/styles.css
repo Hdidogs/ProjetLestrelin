@@ -94,6 +94,7 @@ body {
 /* Page Content match avec la Side Bar */
 div.content {
     background-color: #eaeaea;
+    margin-right: 220px;
     margin-left: 220px;
     padding: 1px 16px;
 }
@@ -102,9 +103,11 @@ div.content {
     100% {
         margin-right: 0%;
     }
+
     25% {
         margin-right: 5%;
     }
+
     0% {
         margin-right: 11%;
     }
@@ -114,9 +117,11 @@ div.content {
     100% {
         margin-left: 0%;
     }
+
     25% {
         margin-left: 5%;
     }
+
     0% {
         margin-left: 11%;
     }
@@ -130,7 +135,19 @@ div.content {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+<<<<<<< HEAD
+    margin-right: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+=======
+>>>>>>> 841a652c680be0ded5a21778631d280409b5b0e9
 }
+
 
 .case-delete {
     border-top-right-radius: 10px;
@@ -183,7 +200,7 @@ div.content {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.close {
+.close, .close-ajouter, .close-piece, .close-supprimer {
     color: #aaa;
     float: right;
     font-size: 28px;
