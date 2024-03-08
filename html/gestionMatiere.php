@@ -30,7 +30,7 @@ if (isset($_SESSION['id_user'])) {
 ?>
 <div class="side-bar-big">
     <a href="gestionMatiere.php">Gestion des Matière</a>
-    <a href="#">Gestion des Projets</a>
+    <a href="gestionProjet.php">Gestion des Projets</a>
     <a href="#">Débit de Matière</a>
     <a href="#">Commande de Matière</a>
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
@@ -81,11 +81,13 @@ foreach ($res as $matiere) {
             <h1>Bienvenue</h1>
             <span class="close">&times;</span>
         </div>
+
+        <input id="modifId" name="id">
         <div class="modal-content">
-            <p>test</p>
-            <!-- <script>
-                document.write("id : " +   id);
-             </script> -->
+            <p>test
+
+                t t
+            </p>
         </div>
         <div class="modal-footer">
             <button type="reset">Réinitialiser</button>
@@ -94,16 +96,15 @@ foreach ($res as $matiere) {
     </form>
 </div>
 
-<script>
+<script type="text/javascript">
     var modal = document.getElementById("modal-edit");
-
-    var id = 0;
 
     var span = document.getElementsByClassName("close")[0];
 
     function afficher(id) {
         modal.style.display = "block";
-        this.id = id;
+
+        $("#modifId").val(id)
     }
 
     span.onclick = function() {

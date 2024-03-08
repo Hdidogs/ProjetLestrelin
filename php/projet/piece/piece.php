@@ -33,22 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     $conn = new SQLConnexion();
-    $stmt = $conn->conbdd()->prepare("INSERT INTO projet (image,nom) VALUES (?,?)");
-    $stmt->execute([$imagePath,$nouveauNom]);
-    echo 'Image ajouté avec succès!';
 
-    $matiere = $_POST["choixMatiere"];
-    $projet = $_POST["projet"];
-    $nouveauNom = $_POST['nouveauNom'];
+    $stmt = $conn->conbdd()->prepare("INSERT INTO piece (img, nom) VALUES (:img, :nom)");
+    $stmt->execute(["img" => $imagePath, "nom" => $nouveauNom]);
 
+    $piece = $conn->conbdd()->lastInsertId();
 
+    $stmt = $conn->conbdd()->prepare("INSERT INTO pieceprojet (ref_piece, ref_projet) VALUES (:piece, :projet)");
+    $stmt->execute(["piece" => $piece, "projet" => $_POST['projet']]);
 
-    $stmt = $conn->conbdd()->prepare("SELECT m.id_matiere, m.nom, m.ref_materiau, m.ref_forme,m.longueur,m.hauteur,m.epaisseur,m.largeur,m.diametre,pr.id_projet	,pr.nom	,pr.image,pj.ref_piece,pj.ref_projet,p.img,p.nom,p.id_piece,mp.ref_matiere,mp.ref_piece FROM matiere as m 
-    INNER JOIN matierepiece as mp on mp.ref_matiere = m.id_matiere
-    INNER JOIN piece p on mp.ref_piece = p.id_piece  
-    INNER JOIN pieceprojet pj on pj.ref_piece = p.id_piece
-    INNER JOIN projet pr on pj.ref_projet = pr.id_projet
-    WHERE p.nom = ? and m.nom = ? and pr.nom = ?");
-    $stmt->execute(array($matiere,$projet,$nouveauNom));
+    $stmt = $conn->conbdd()->prepare("INSERT INTO matierepiece (ref_piece, ref_matiere) VALUES (:piece, :matiere)");
+    $stmt->execute(["piece" => $piece, "matiere" => $_POST['matiere']]);
 
+    header("Location: ../../../html/gestionProjet.php");
 }
+?>
