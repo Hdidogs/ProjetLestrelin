@@ -51,8 +51,8 @@ $res = $req->fetchAll();
 foreach ($res as $matiere) {
     ?>
     
-    <div class="case">
-        <h5><?php
+    <div class="case card">
+        <h5 class="card-title"><?php
             $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
             $requete->execute(['id' => $matiere['ref_materiau']]);
             $result = $requete->fetch();
@@ -65,10 +65,10 @@ foreach ($res as $matiere) {
 
             echo $forme . " en " . $materiau;
             ?></h5>
-        <p><?= $matiere['longueur'] . "cm"?></p>
+        <p class="card-text"><?= $matiere['longueur'] . "Cm"?></p>
         <input type="hidden" name="id" value="<?=$matiere['id_matiere']?>">
-        <a id="btn-edit" onclick="afficher(<?=$matiere['id_matiere']?>)" class="case-edit">Modifier</a>
-        <a id="btn-delete" class="case-delete" href="#">Supprimer</a>
+        <a id="btn-edit" onclick="afficher(<?=$matiere['id_matiere']?>)" class="case-edit btn btn-primary">Modifier</a>
+        <a id="btn-delete" class="case-delete btn btn-danger" href="#">Supprimer</a>
     </div>
 <?php
 }
@@ -78,20 +78,26 @@ foreach ($res as $matiere) {
 <div id="modal-edit" class="modal">
     <form method="get" action="../php/matiere/editMatiere.php">
         <div class="modal-header">
-            <h1>Bienvenue</h1>
+            <h1>Modification  </h1>
             <span class="close">&times;</span>
         </div>
-
-        <input id="modifId" name="id">
         <div class="modal-content">
-            <p>test
-
-                t t
-            </p>
+            <div class="form-group">
+                <label for="longueur">Longueur</label>
+                <input type="number" class="form-control" id="longueur" name="longueur" placeholder="Longueur" required>
+            </div>
+            <div class="form-group
+            <label for="ref_materiau">Materiau</label>
+            <select class="form-select" id="ref_materiau" name="ref_materiau" required>
+                <option value="1">Aluminium</option>
+                <option value="2">Acier</option>
+                <option value="3">Cuivre</option>
+                <option value="4">Plastique</option>
+            </select>
         </div>
         <div class="modal-footer">
-            <button type="reset">Réinitialiser</button>
-            <button type="submit">Modifier</button>
+            <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
         </div>
     </form>
 </div>
@@ -105,6 +111,11 @@ foreach ($res as $matiere) {
         modal.style.display = "block";
 
         $("#modifId").val(id)
+
+        // Centrer la pop-up au milieu de l'écran
+        modal.style.transform = "translate(-50%, -50%)";
+        modal.style.top = "50%";
+        modal.style.left = "50%";
     }
 
     span.onclick = function() {
