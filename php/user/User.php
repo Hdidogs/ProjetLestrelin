@@ -114,6 +114,8 @@ class User{
 
         $id_user = $co->conbdd()->lastInsertId();
 
+        var_dump($id_user);
+
         if ($id_user) {
             session_start();
 
@@ -123,10 +125,10 @@ class User{
             $_SESSION['mail'] = $this->getMail();
             $_SESSION['fonction'] = $this->getFonction();
 
-            header("Location: ../html/index.php");
+            //header("Location: ../../html/index.php");
             return true;
         } else {
-            header("Location: ../html/inscription.html");
+            //header("Location: ../../html/inscription.html");
             return false;
         }
     }
@@ -137,9 +139,9 @@ class User{
         $check_mail = $co->conbdd()->prepare("SELECT mail FROM user WHERE mail = :mail");
         $check_mail->execute(['mail'=>$this->getMail()]);
 
-        $mail = $check_mail->fetch();
+        $mail = $check_mail->fetchAll();
 
-        if (is_array($mail['mail'])) {
+        if ($mail != null) {
             return true;
         } else {
             return false;

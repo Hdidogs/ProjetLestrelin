@@ -13,7 +13,7 @@ if ($remdp == $mdp) {
     $prenom = strtolower($prenom);
     $user = new User(["nom"=>strtoupper($nom), "prenom"=>ucfirst($prenom), "mail"=>$mail, "mdp"=>$newmdp, "fonction"=>"Elève"]);
 
-    var_dump($user->getFonctionId());
+    var_dump($user->checkIfMailExist());
     if ($user->checkIfMailExist()) {
         header("Location: ../../html/inscription.html");
     } else {
