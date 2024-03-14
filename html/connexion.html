@@ -1,37 +1,121 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="fr">
+
 <head>
-  <meta charset="utf-8">
-  <title>Connexion</title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" />
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
-  <link rel="stylesheet" href="../css/styles.css" />
-
-  <!-- JavaScripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion et Inscription</title>
+    <link rel="stylesheet" href="../css/style.css" />
 </head>
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
-  <main class="form-signin w-100 m-auto" style="text-align: center">
-    <img src="../assets/images/50-Lycee-Robert-Schuman.jpg" width="128" height="158">
-    <br>
-    <br>
-    <br>
-    <form method="post" action="../php/user/connexion.php">
-      <div class="form-floating">
-        <input type="email" name="mail" class="form-control" id="floatingInput" placeholder="mail" required style="margin-bottom: -1px; border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
-        <label for="floatingInput">Adresse Mail</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" name="mdp" class="form-control" id="floatingPassword" placeholder="Password" required style="margin-bottom: 10px; border-top-left-radius: 0; border-top-right-radius: 0;">
-        <label for="floatingPassword">Mot de Passe</label>
-      </div>
-      <button class="btn btn-primary w-100 py-2" type="submit">Connexion</button>
-    </form>
-    <p>Pas encore inscrit ? <a href="inscription.html">Cliquez ici</a></p>
-  </main>
+
+<body>
+    <main>
+        <div class="box">
+            <div class="inner-box">
+                <div class="forms-wrap">
+                    <form action="connexion.html" autocomplete="off" class="sign-in-form">
+                        <div class="logo">
+                            <img src="../assets/images/logo.png" alt="easyclass" />
+                            <h4>Gestion de Stock</h4>
+                        </div>
+                        <div class="heading">
+                            <h2>Bienvenue</h2>
+                            <h6>Pas encore inscrit ?</h6>
+                            <a href="#" class="toggle">Inscription</a>
+                        </div>
+
+                        <div class="actual-form">
+                            <div class="input-wrap">
+                                <input type="text" minlength="4" class="input-field" autocomplete="off" required />
+                                <label>Nom</label>
+                            </div>
+
+                            <div class="input-wrap">
+                                <input type="password" minlength="4" class="input-field" autocomplete="off" required />
+                                <label>Mot de Passe</label>
+                            </div>
+
+                            <input type="submit" value="Se Connecter" class="sign-btn" />
+
+                            <p class="text">
+                                Mot de passe oublié ?
+                                <a href="#">Besoin d'aide ?</a> pour se connecter
+                            </p>
+                        </div>
+                    </form>
+
+                    <form action="connexion.html" autocomplete="off" class="sign-up-form">
+                        <div class="logo">
+                            <img src="../assets/images/logo.png" alt="easyclass" />
+                            <h4>Gestion de Stock</h4>
+                        </div>
+
+                        <div class="heading">
+                            <h2>Commencer</h2>
+                            <h6>Déjà un compte ?</h6>
+                            <a href="#" class="toggle">Se connecter</a>
+                        </div>
+
+                        <div class="actual-form">
+                            <div class="input-wrap">
+                                <input type="text" minlength="4" class="input-field" autocomplete="off" required />
+                                <label>Nom</label>
+                            </div>
+
+                            <div class="input-wrap">
+                                <input type="email" class="input-field" autocomplete="off" required />
+                                <label>Email</label>
+                            </div>
+
+                            <div class="input-wrap">
+                                <input type="password" minlength="4" class="input-field" autocomplete="off" required />
+                                <label>Mot de passe</label>
+                            </div>
+
+                            <input type="submit" value="S'inscrire" class="sign-btn" />
+
+                            <p class="text">
+                                En vous inscrivant, vous acceptez les
+                                <a href="#">Conditions d'utilisation</a> et la
+                                <a href="#">Politique de confidentialité</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="carousel">
+                    <div class="images-wrapper">
+                        <img src="../assets/images/image1.png" class="image img-1 show" alt="" />
+                        <img src="../assets/images/image2.png" class="image img-2" alt="" />
+                        <img src="../assets/images/image1.png" class="image img-3" alt="" />
+                    </div>
+
+                    <div class="text-slider">
+                        <div class="text-wrap">
+                            <div class="text-group">
+                                <div class="heading">
+                                    <h2>Gestion Stock</h2>
+                                    <h2>Visualisation du Stock</h2>
+                                    <h2>Commande / Bon de débit </h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bullets">
+                            <span class="active" data-value="1"></span>
+                            <span data-value="2"></span>
+                            <span data-value="3"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fichier JavaScript -->
+
+    <script src="app.js"></script>
 </body>
+
 </html>
