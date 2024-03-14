@@ -37,11 +37,11 @@ body {
 }
 
 /* Ajout d'un style de survol aux cases */
-.form-signin .form-floating:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-    transition: transform 0.3s ease-in-out;
-}
+    .form-signin .form-floating:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+        transition: transform 0.3s ease-in-out;
+    }
 
 /* Ajout d'une transition aux liens de la barre latérale */
 .side-bar-action a, .side-bar-big a, .side-bar-big a.account {
@@ -131,4 +131,3 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
-```
