@@ -25,7 +25,7 @@ if (isset($_SESSION['id_user'])) {
 } else {
     header("Location: ../html/connexion.html");
 }
- ?>
+?>
 
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100%; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -48,7 +48,7 @@ if (isset($_SESSION['id_user'])) {
         <br>
         <li>
             <a href="debitMatiere.php"" class="btn btn-warning" style="width: 200px">
-                Débit de Matière
+            Débit de Matière
             </a>
         </li>
         <br>
@@ -75,3 +75,4 @@ if (isset($_SESSION['id_user'])) {
 </div>
 </body>
 </html>
+

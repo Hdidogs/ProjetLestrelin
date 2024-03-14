@@ -1,0 +1,9 @@
+html,
+body {
+    height: 100%;
+    background-color: #eaeaea;
+}
+
+.d-flex a:hover {
+    transform: scale(1.05);
+}

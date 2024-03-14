@@ -14,72 +14,27 @@
         <div class="box">
             <div class="inner-box">
                 <div class="forms-wrap">
-                    <form action="connexion.html" autocomplete="off" class="sign-in-form">
+                    <form action="../php/user/connexion.php" method="post" autocomplete="off" class="sign-in-form">
                         <div class="logo">
                             <img src="../assets/images/logo.png" alt="easyclass" />
                             <h4>Gestion de Stock</h4>
                         </div>
                         <div class="heading">
                             <h2>Bienvenue</h2>
-                            <h6>Pas encore inscrit ?</h6>
-                            <a href="#" class="toggle">Inscription</a>
                         </div>
 
                         <div class="actual-form">
                             <div class="input-wrap">
-                                <input type="text" minlength="4" class="input-field" autocomplete="off" required />
-                                <label>Nom</label>
+                                <input name="mail" type="text" minlength="4" class="input-field" autocomplete="off" required />
+                                <label>Adresse Mail</label>
                             </div>
 
                             <div class="input-wrap">
-                                <input type="password" minlength="4" class="input-field" autocomplete="off" required />
+                                <input name="mdp" type="password" minlength="4" class="input-field" autocomplete="off" required />
                                 <label>Mot de Passe</label>
                             </div>
 
                             <input type="submit" value="Se Connecter" class="sign-btn" />
-
-                            <p class="text">
-                                Mot de passe oublié ?
-                                <a href="#">Besoin d'aide ?</a> pour se connecter
-                            </p>
-                        </div>
-                    </form>
-
-                    <form action="connexion.html" autocomplete="off" class="sign-up-form">
-                        <div class="logo">
-                            <img src="../assets/images/logo.png" alt="easyclass" />
-                            <h4>Gestion de Stock</h4>
-                        </div>
-
-                        <div class="heading">
-                            <h2>Commencer</h2>
-                            <h6>Déjà un compte ?</h6>
-                            <a href="#" class="toggle">Se connecter</a>
-                        </div>
-
-                        <div class="actual-form">
-                            <div class="input-wrap">
-                                <input type="text" minlength="4" class="input-field" autocomplete="off" required />
-                                <label>Nom</label>
-                            </div>
-
-                            <div class="input-wrap">
-                                <input type="email" class="input-field" autocomplete="off" required />
-                                <label>Email</label>
-                            </div>
-
-                            <div class="input-wrap">
-                                <input type="password" minlength="4" class="input-field" autocomplete="off" required />
-                                <label>Mot de passe</label>
-                            </div>
-
-                            <input type="submit" value="S'inscrire" class="sign-btn" />
-
-                            <p class="text">
-                                En vous inscrivant, vous acceptez les
-                                <a href="#">Conditions d'utilisation</a> et la
-                                <a href="#">Politique de confidentialité</a>
-                            </p>
                         </div>
                     </form>
                 </div>
@@ -114,8 +69,7 @@
     </main>
 
     <!-- Fichier JavaScript -->
-
-    <script src="app.js"></script>
+    <script src="../js/app.js"></script>
 </body>
 
 </html>
