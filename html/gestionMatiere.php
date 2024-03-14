@@ -21,11 +21,11 @@ include '../php/SQLConnexion.php';
 session_start();
 $conn = new SQLConnexion();
 
-if (isset($_SESSION['id_user'])) {
-    $id_user = $_SESSION['id_user'];
-} else {
-    header("Location: ../html/connexion.html");
-}
+//if (isset($_SESSION['id_user'])) {
+//   $id_user = $_SESSION['id_user'];
+//} else {
+//   header("Location: ../html/connexion.html");
+//}
 ?>
 <div class="side-bar-big">
     <a href="gestionMatiere.php">Gestion des Matière</a>

@@ -1,0 +1,217 @@
+html,
+body {
+    height: 100%;
+    background-color: #eaeaea;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.side-bar-title {
+    margin: 16px;
+}
+
+/* Side Bar action */
+.side-bar-action {
+    right: 0;
+    margin: 0;
+    padding: 0;
+    width: 220px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Side Bar button (balise a) */
+.side-bar-action a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+/* Side Bar button passage souris angle arrondis côté droit & changement de couleur */
+.side-bar-action a:hover:not(.active) {
+    background-color: #e7e8e8;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    animation-duration: 2s;
+    animation: apparitionHoverARight 0.3s linear forwards;
+}
+
+/* Side Bar chrore */
+.side-bar-big {
+    margin: 0;
+    padding: 0;
+    width: 220px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Side Bar button (balise a) */
+.side-bar-big a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.side-bar-big a.account {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+    margin-top: 200%;
+}
+
+/* Side Bar button passage souris angle arrondis côté droit & changement de couleur */
+.side-bar-big a:hover:not(.active) {
+    background-color: #e7e8e8;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    animation-duration: 2s;
+    animation: apparitionHoverA 0.3s linear forwards;
+}
+
+.side-bar-big a.account:hover:not(.active) {
+    background-color: #134bc4;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: white;
+}
+
+/* Page Content match avec la Side Bar */
+div.content {
+    background-color: #eaeaea;
+    margin-right:220px;
+    margin-left: 220px;
+    padding: 1px 16px;
+}
+
+@keyframes apparitionHoverA {
+    100% {
+        margin-right: 0%;
+        scale: 105%;
+    }
+    25% {
+        margin-right: 5%;
+    }
+    0% {
+        margin-right: 11%;
+        scale: 100%;
+    }
+}
+
+@keyframes apparitionHoverARight {
+    100% {
+        margin-left: 0%;
+        scale: 105%;
+    }
+    25% {
+        margin-left: 5%;
+    }
+    0% {
+        margin-left: 11%;
+        scale: 100%;
+    }
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.case img {
+    width: 50%;
+    height: auto;
+    display:block;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.case {
+    margin: 10px;
+    width: calc(33.33% - 20px); /* Adjust the width based on your layout */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.case-delete {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    text-decoration: none;
+    background-color: #f11515;
+    padding: 7px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.case-edit {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    text-decoration: none;
+    background-color: #153af1;
+    padding: 7px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.case-edit:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #1437e1;
+}
+
+.case-delete:hover {
+    color: white;
+}
+
+.modal {
+    left: 25%;
+    top: 25%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: auto;
+    height: auto;
+    overflow: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
