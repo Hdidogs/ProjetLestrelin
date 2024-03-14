@@ -21,11 +21,11 @@ include '../php/SQLConnexion.php';
 session_start();
 $conn = new SQLConnexion();
 
-if (isset($_SESSION['id_user'])) {
-    $id_user = $_SESSION['id_user'];
-} else {
-    header("Location: ../html/connexion.html");
-}
+//if (isset($_SESSION['id_user'])) {
+//    $id_user = $_SESSION['id_user'];
+//} else {
+//    header("Location: ../html/connexion.html");
+//}
 
 $req = $conn->conbdd()->query("SELECT * FROM projet");
 $resProjet = $req->fetchAll();
@@ -95,7 +95,7 @@ $resProjet = $req->fetchAll();
                 <option name="matiere" value="<?=$matiere['id_matiere']?>"><?=$forme . " en " . $materiau?></option>
                 <?php }?>
             </select>
-
+//
             <input type="text" placeholder="longueur" name="longueur">
 
             <select name="projet" required>
