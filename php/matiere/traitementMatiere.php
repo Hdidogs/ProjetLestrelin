@@ -23,6 +23,7 @@ if (array_key_exists("suppr", $_GET)) {
         'fournisseur'=>$_GET['fournisseur'],
         'matiere'=>$_GET['matiere'],
         'classe'=>$_GET['classe']]);
+
     $matiere->commande();
 }
 ?>
