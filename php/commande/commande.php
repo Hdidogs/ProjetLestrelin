@@ -10,7 +10,7 @@ $mail = new PHPMailer(true);
 
 try {
 var_dump($_GET["fournisseur"]);
-    $comment = "Nouvelle Commande de ".$_GET['nom']. " " . $_GET['prenom']. " pour la classe " . $_GET['classe'] . ". Nous avons besoin de " . $_GET['forme'] . " " . $_GET['$materiau'] . " de " . $_GET['quantite'] . " mètres de long.";
+    $comment = "Nouvelle Commande de ".$_GET['nom']. " " . $_GET['prenom']. " pour la classe " . $_GET['classe'] . ". Nous avons besoin de " . $_GET['forme'] . " " . $_GET['materiau'] . " de " . $_GET['quantite'] . " mètres de long.";
 
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
