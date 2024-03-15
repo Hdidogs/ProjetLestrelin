@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </head>
-<body>
+<div>
 <?php
 include '../php/SQLConnexion.php';
 
@@ -27,52 +27,13 @@ if (isset($_SESSION['id_user'])) {
    header("Location: ../html/connexion.html");
 }
 ?>
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100%; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <span class="fs-4"><i class="fa-solid fa-cubes-stacked"></i> Gestion de Stock</span>
-    </a>
-    <hr>
-
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="gestionMatiere.php" class="btn btn-danger" aria-current="page" style="width: 200px">
-                Gestion des Matière
-            </a>
-        </li>
-        <br>
-        <li>
-            <a href="gestionProjet.php" class="btn btn-success" style="width: 200px">
-                Gestion des Projets
-            </a>
-        </li>
-        <br>
-        <li>
-            <a href="debitMatiere.php"" class="btn btn-warning" style="width: 200px">
-            Débit de Matière
-            </a>
-        </li>
-        <br>
-        <li>
-            <a href="commandeMatiere.php" class="btn btn-primary" style="width: 200px">
-                Commande de Matière
-            </a>
-        </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
-        <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/hdidogs.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></strong>
-        </a>
-        <ul class="dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
+    <div class="side-bar-big">
+        <a class="gestionMatiere" href="gestionMatiere.php">Gestion des Matière</a>
+        <a class="gestionProjet" href="gestionProjet.php">Gestion des Projets</a>
+        <a class="debitMatiere" href="debitMatiere.php">Débit de Matière</a>
+        <a class="commandMatiere" href="commandeMatiere.php">Commande de Matière</a>
+        <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
     </div>
-</div>
 
 <div class="side-bar-action">
     <a>Ajouter Matière</a>
@@ -81,7 +42,6 @@ if (isset($_SESSION['id_user'])) {
     <br>
     <h4 class="side-bar-title">Trier</h4>
 </div>
-    
 <div class="content">
 <?php
 $req = $conn->conbdd()->query("SELECT * FROM matiere");
@@ -89,7 +49,6 @@ $res = $req->fetchAll();
 
 foreach ($res as $matiere) {
     ?>
-    
     <div class="case card">
         <h5 class="card-title"><?php
             $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
@@ -113,6 +72,7 @@ foreach ($res as $matiere) {
 <?php
 }
 ?>
+    </div>
 </div>
 
 <!-- Modals -->
@@ -183,6 +143,7 @@ foreach ($res as $matiere) {
         </div>
     </form>
 </div>
+
 
 <script type="text/javascript">
     var modal = document.getElementById("modal-edit");
