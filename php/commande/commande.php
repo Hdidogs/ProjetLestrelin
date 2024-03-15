@@ -62,4 +62,3 @@ var_dump($_GET["fournisseur"]);
 }
 
 header("Location: ../../html/commandeMatiere.php");
-
