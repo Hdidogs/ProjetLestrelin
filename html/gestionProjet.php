@@ -18,14 +18,14 @@
 <?php
 include '../php/SQLConnexion.php';
 
-session_start();
+//session_start();
 $conn = new SQLConnexion();
-
-if (isset($_SESSION['id_user'])) {
-    $id_user = $_SESSION['id_user'];
-} else {
-    header("Location: ../html/connexion.html");
-}
+//
+//if (isset($_SESSION['id_user'])) {
+//    $id_user = $_SESSION['id_user'];
+//} else {
+//    header("Location: ../html/connexion.html");
+//}
 
 $req = $conn->conbdd()->query("SELECT * FROM projet");
 $resProjet = $req->fetchAll();
@@ -117,9 +117,11 @@ $resProjet = $req->fetchAll();
     <?php
     foreach ($resProjet as $projet) {
     ?>
-    <div class="case" onclick="">
+    <div class="case">
+        <a href="pieceProjet.php?id=<?=$projet["id_projet"]?>">
         <h5><?=$projet["nom"]?></h5>
         <img src="projetLestrelin/<?= $projet["img"]?>">
+        </a>
     </div>
     <?php }?>
 </div>
@@ -148,9 +150,9 @@ $resProjet = $req->fetchAll();
     }
 
     window.onclick = function(event) {
-        if (event.target == modalProjet) {
+        if (event.target === modalProjet) {
             modalProjet.style.display = "none";
-        } else if (event.target == modalPiece) {
+        } else if (event.target === modalPiece) {
             modalPiece.style.display = "none";
         }
     }
@@ -175,6 +177,8 @@ $resProjet = $req->fetchAll();
             preview.style.display = 'none';
         }
     }
+
+
 </script>
 </body>
 </html>

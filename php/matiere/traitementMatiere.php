@@ -15,6 +15,8 @@ if (array_key_exists("suppr", $_GET)) {
         'classe'=>$_GET['classe']]);
     $matiere->debit();
 } else if (array_key_exists("commande", $_GET)) {
+    $conn = new SQLConnexion();
+
     $matiere = new Matiere(['date'=>$_GET['date'],
         'quantite'=>$_GET['quantite'],
         'etat'=>$_GET['etat'],
@@ -23,6 +25,8 @@ if (array_key_exists("suppr", $_GET)) {
         'fournisseur'=>$_GET['fournisseur'],
         'matiere'=>$_GET['matiere'],
         'classe'=>$_GET['classe']]);
+
     $matiere->commande();
 }
 ?>
+

@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);
             }
-            $nouveauNom = $_POST['nouveauNom'];
+            $nouveauNom = str_replace(" ","_",$_POST['nouveauNom']);
             $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             // Construit le chemin complet du fichier image
             $imagePath = $target_dir . $nouveauNom . "." . $extension;
