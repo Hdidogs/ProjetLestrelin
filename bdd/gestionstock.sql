@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 15 mars 2024 à 08:13
+-- Généré le : ven. 15 mars 2024 à 08:15
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -54,6 +54,7 @@ DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `id_commande` int NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
+  `quantite` int NOT NULL,
   `etat` varchar(100) NOT NULL,
   `num_devis` int NOT NULL,
   `ref_classe` int NOT NULL,
