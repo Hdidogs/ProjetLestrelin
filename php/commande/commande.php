@@ -60,3 +60,6 @@ var_dump($_GET["fournisseur"]);
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
+header("Location: ../../html/commandeMatiere.php");
+

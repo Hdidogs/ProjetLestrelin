@@ -242,7 +242,7 @@ class Matiere {
         $requete = $conn->conbdd()->prepare("SELECT libelle FROM forme WHERE id_forme = :id");
         $requete->execute(['id' => $res['ref_forme']]);
         $result = $requete->fetch();
-        $forme = $result['libel²le'];
+        $forme = $result['libelle'];
 
         $requete = $conn->conbdd()->prepare("SELECT nom, prenom FROM user WHERE id_user = :id");
         $requete->execute(['id'=>$this->getUser()]);
