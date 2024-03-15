@@ -9,7 +9,9 @@ require '../../vendor/autoload.php';
 $mail = new PHPMailer(true);
 
 try {
-var_dump($_POST["fournisseur"]);
+var_dump($_GET["fournisseur"]);
+    $comment = "Nouvelle Commande de ".$_GET['nom']. " " . $_GET['prenom']. " pour la classe " . $_GET['classe'] . ". Nous avons besoin de " . $_GET['forme'] . " " . $_GET['materiau'] . " de " . $_GET['quantite'] . " mètres de long.";
+
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
@@ -21,10 +23,10 @@ var_dump($_POST["fournisseur"]);
     $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     // Vérifie si les variables POST sont définies et non vides
-    if(isset($_POST['fournisseur'])) {
+    if(isset($_GET['fournisseur'])) {
         // Vérifie si les adresses e-mail sont au bon format
-        if(filter_var($_POST['fournisseur'], FILTER_VALIDATE_EMAIL)) {
-            $mail->addAddress($_POST['fournisseur']);
+        if(filter_var($_GET['fournisseur'], FILTER_VALIDATE_EMAIL)) {
+            $mail->addAddress($_GET['fournisseur']);
         } else {
             echo 'Adresse e-mail invalide.';
             // Arrête l'exécution du script si les adresses e-mail sont invalides
@@ -38,7 +40,7 @@ var_dump($_POST["fournisseur"]);
 
     //Recipients
     $mail->setFrom("mrlestrelin0@gmail.com", 'Lestrelin');
-    $mail->addAddress($_POST['fournisseur']);     //Add a recipient
+    $mail->addAddress($_GET['fournisseur']);     //Add a recipient
     $mail->addAddress('mrlestrelin0@gmail.com');  //Name is optional
     $mail->addAddress('mrlestrelin@gmail.com');
     $mail->addReplyTo('mrlestrelin0@gmail.com', 'Lestrelin');
@@ -49,12 +51,15 @@ var_dump($_POST["fournisseur"]);
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = $_POST['ndevis'];
-    $mail->Body = $_POST['comment'];
-    $mail->AltBody = $_POST['comment'];
+    $mail->Subject = $_GET['ndevis'];
+    $mail->Body = $comment;
+    $mail->AltBody = $comment;
 
     $mail->send();
     echo 'Message has been sent';
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
+header("Location: ../../html/commandeMatiere.php");
+

@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="../css/styles.css"/>
 </head>
 <body>
+<<<<<<< HEAD
+=======
+<div>
+>>>>>>> bded785111861ea90c17cdc577201fc4f30f5c64
 <?php
 // Inclure le fichier de connexion à la base de données
 include '../php/SQLConnexion.php';
@@ -80,7 +84,115 @@ foreach ($res as $matiere) {
         <a id="btn-edit" onclick="afficher(<?= $matiere['id_matiere'] ?>)" class="case-edit">Modifier</a>
         <a id="btn-delete" onclick="afficherSupprimer(<?= $matiere['id_matiere'] ?>)" class="case-delete">Supprimer</a>
         </div>
+<<<<<<< HEAD
         <?php
+=======
+
+        <input id="modifId" name="id" >
+        <div class="modal-content">
+            <p>test</p>
+        </div>
+        <div class="modal-footer">
+            <button type="reset">Réinitialiser</button>
+            <button name="edit" type="submit">Modifier</button>
+        </div>
+    </form>
+</div>
+
+<div id="modal-suppr" class="modal">
+    <form method="get" action="../php/matiere/traitementMatiere.php">
+        <div class="modal-header">
+            <h1>Supprimer</h1>
+            <span class="close-supprimer">&times;</span>
+        </div>
+
+        <input type="hidden" id="supprId" name="id" >
+        <div class="modal-content">
+            <p>Êtes vous sûr de vouloir supprimer cette matière ?
+            Seul supprimeras en même temps toute historique lier a cette matière !</p>
+        </div>
+        <div class="modal-footer">
+            <button class="close" type="button">Non</button>
+            <button name="suppr" type="submit">Oui</button>
+        </div>
+    </form>
+</div>
+
+<!-- Ajouter -->
+
+<div id="modal-ajouter" class="modal">
+    <form method="get" action="../php/matiere/traitementMatiere.php">
+        <div class="modal-header">
+            <h1>Ajouter</h1>
+            <span class="close-ajouter">&times;</span>
+        </div>
+        <div class="modal-content">
+            <select>
+                <?php
+                $req = $conn->conbdd()->query("SELECT * FROM materiau");
+                $res = $req->fetchAll();
+
+                foreach ($res as $materiau) {
+                ?>
+                <option><?=$materiau['libelle']?></option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button type="reset">Réinitialiser</button>
+            <button name="add" type="submit">Ajouter</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    var modal = document.getElementById("modal-edit");
+    var modalAjouter = document.getElementById("modal-edit");
+    var modalSupprimer = document.getElementById("modal-suppr");
+
+    var span = document.getElementsByClassName("close")[0];
+    var spanAjouter = document.getElementsByClassName("close-ajouter")[0];
+    var spanSupprimer = document.getElementsByClassName("close-supprimer")[0];
+
+    function afficher(id) {
+        modal.style.display = "block";
+
+        $("#modifId").val(id)
+
+        // Centrer la pop-up au milieu de l'écran
+        modal.style.transform = "translate(-50%, -50%)";
+        modal.style.top = "50%";
+        modal.style.left = "50%";
+    }
+
+    function afficherSupprimer(id) {
+        modalSupprimer.style.display = "block";
+
+        $("#supprId").val(id)
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    spanAjouter.onclick = function() {
+        modalAjouter.style.display = "none";
+    }
+
+    spanSupprimer.onclick = function() {
+        modalSupprimer.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        } else if (event.target == modalSupprimer) {
+            modalSupprimer.style.display = "none";
+        } else if (event.target == modalAjouter) {
+            modalAjouter.style.display = "none";
+>>>>>>> bded785111861ea90c17cdc577201fc4f30f5c64
         }
         ?>
         </div>

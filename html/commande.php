@@ -18,7 +18,6 @@ $nposte = $req->fetchAll();
 </head>
 <body>
 <form action="../php/commande/commande.php" method="post" enctype="multipart/form-data">
-
         <div class="form-group">
             <label for="exampleFormControlSelect1">Fournisseur :</label>
             <select name="fournisseur">
