@@ -14,6 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </head>
+<body>
 <div>
 <?php
 include '../php/SQLConnexion.php';
@@ -143,7 +144,6 @@ foreach ($res as $matiere) {
         </div>
     </form>
 </div>
-
 
 <script type="text/javascript">
     var modal = document.getElementById("modal-edit");

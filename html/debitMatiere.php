@@ -39,10 +39,15 @@ if (isset($_SESSION['id_user'])) {
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
 </div>
 
-<div class="content">
-    <h2 style="text-align: center">Historique</h2>
-    <br>
+<div class="side-bar-action">
+    <a onclick="afficher()">Nouveau Débit</a>
+</div>
 
+<div class="content">
+    <h2 style="text-align: center; width: 600px">Historique</h2>
+    <br>
+    <br>
+    <br>
     <table id="historique">
         <thead>
             <tr>
@@ -106,7 +111,106 @@ if (isset($_SESSION['id_user'])) {
     </table>
 </div>
 
+<div id="modal-debit" class="modal">
+    <form method="get" action="../php/matiere/traitementMatiere.php">
+        <div class="modal-header">
+            <h1>Nouveau Débit</h1>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-content">
+            <input type="date" name="date">
+            <input type="number" placeholder="Quantité (m)" name="quantite">
+            <select name="piece">
+                <?php
+                    $requete = $conn->conbdd()->query("SELECT id_piece, nom FROM piece");
+                    $resultat = $requete->fetchAll();
+
+                    foreach ($resultat as $piece) {
+                        ?>
+                        <option value="<?= $piece['id_piece'] ?>"><?= $piece['nom']?></option>
+                <?php
+                    }
+                ?>
+            </select>
+
+            <select name="user">
+                <?php
+                $requete = $conn->conbdd()->query("SELECT id_user, nom, prenom FROM user");
+                $resultat = $requete->fetchAll();
+
+                foreach ($resultat as $user) {
+                    ?>
+                    <option value="<?= $user['id_user'] ?>"><?= $user['nom'] . " " . $user['prenom'] ?></option>
+                    <?php
+                }
+                ?>
+            </select>
+
+            <select name="classe">
+                <?php
+                $requete = $conn->conbdd()->query("SELECT id_classe, libelle FROM classe");
+                $resultat = $requete->fetchAll();
+
+                foreach ($resultat as $classe) {
+                    ?>
+                    <option value="<?= $classe['id_classe'] ?>"><?= $classe['libelle']?></option>
+                    <?php
+                }
+                ?>
+            </select>
+
+            <select name="matiere">
+                <?php
+                $requete = $conn->conbdd()->query("SELECT id_matiere, ref_materiau, ref_forme FROM matiere");
+                $resultat = $requete->fetchAll();
+
+                foreach ($resultat as $matiere) {
+                    $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
+                    $requete->execute(['id' => $matiere['ref_materiau']]);
+                    $result = $requete->fetch();
+                    $materiau = $result['libelle'];
+
+                    $requete = $conn->conbdd()->prepare("SELECT libelle FROM forme WHERE id_forme = :id");
+                    $requete->execute(['id' => $matiere['ref_forme']]);
+                    $result = $requete->fetch();
+                    $forme = $result['libelle'];
+                    ?>
+                    <option value="<?= $matiere['id_matiere']?>"><?= $forme . " " . $materiau?></option>
+                    <?php
+                }
+                ?>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button type="reset">Réinitialiser</button>
+            <button name="debit" type="submit">Débiter</button>
+        </div>
+    </form>
+</div>
+
 <script>
+    var modal = document.getElementById("modal-debit");
+    var span = document.getElementsByClassName("close")[0];
+
+    function afficher() {
+        modal.style.display = "block";
+
+        // Centrer la pop-up au milieu de l'écran
+        modal.style.transform = "translate(-50%, -50%)";
+        modal.style.top = "50%";
+        modal.style.left = "50%";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
     $(document).ready( function () {
         $('#historique').DataTable();
     } );
