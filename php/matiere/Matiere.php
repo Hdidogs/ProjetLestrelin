@@ -249,7 +249,7 @@ class Matiere {
         $requete->execute(['id'=>$this->getClasse()]);
         $classe = $requete->fetch();
 
-        header("Location: ../commande/commande.php");
+        header("Location: ../commande/commande.php?fournisseur=".$this->getFournisseur()."&ndevis=test");
         header("Location: ?fournisseur=".$this->getFournisseur()."&ndevis=".$this->getNum()."&comment=Nouvelle Commande de ".$user['nom']. " ". $user['prenom']. " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.");
     }
 }
