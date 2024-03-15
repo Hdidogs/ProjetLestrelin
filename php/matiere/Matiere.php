@@ -9,6 +9,9 @@ class Matiere {
     private $user;
     private $classe;
     private $matiere;
+    private $fournisseur;
+    private $num;
+    private $etat;
 
     function __construct(array $info) {
         $this->hydrate($info);
@@ -136,6 +139,54 @@ class Matiere {
         $this->matiere = $matiere;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFournisseur()
+    {
+        return $this->fournisseur;
+    }
+
+    /**
+     * @param mixed $fournisseur
+     */
+    public function setFournisseur($fournisseur): void
+    {
+        $this->fournisseur = $fournisseur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNum()
+    {
+        return $this->num;
+    }
+
+    /**
+     * @param mixed $num
+     */
+    public function setNum($num): void
+    {
+        $this->num = $num;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat): void
+    {
+        $this->etat = $etat;
+    }
+
     public function supprimer() {
         $conn = new SQLConnexion();
         $req = $conn->conbdd()->prepare("DELETE FROM debit WHERE ref_matiere = :id");
@@ -166,5 +217,38 @@ class Matiere {
         $req->execute(['quantite'=>$this->getQuantite()]);
 
         header("Location: ../../html/debitMatiere.php");
+    }
+
+    public function commande() {
+        $conn = new SQLConnexion();
+
+        $req = $conn->conbdd()->prepare("INSERT INTO commande (date, quantite, etat, num_devis, ref_classe, ref_user, ref_matiere, ref_fournisseur) VALUES (:date, :quantite, :etat, :num, :classe, :user, :matiere, :fournisseur)");
+        $req->execute(['date'=>$this->getDate(), 'quantite'=>$this->getQuantite(), 'etat'=>$this->getEtat(), 'num'=>$this->getNum(), 'classe'=>$this->getClasse(), 'user'=>$this->getUser(), 'matiere'=>$this->getMatiere(), 'fournisseur'=>$this->getFournisseur()]);
+
+
+
+        $req= $conn->conbdd()->prepare("SELECT ref_materiau, ref_forme FROM matiere WHERE id_matiere = :id");
+        $req->execute(['id'=>$this->getMatiere()]);
+        $res = $req->fetch();
+
+        $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = :id");
+        $requete->execute(['id' => $res['ref_materiau']]);
+        $result = $requete->fetch();
+        $materiau = $result['libelle'];
+
+        $requete = $conn->conbdd()->prepare("SELECT libelle FROM forme WHERE id_forme = :id");
+        $requete->execute(['id' => $res['ref_forme']]);
+        $result = $requete->fetch();
+        $forme = $result['libelle'];
+
+        $requete = $conn->conbdd()->prepare("SELECT nom, prenom FROM user WHERE id_user = :id");
+        $requete->execute(['id'=>$this->getUser()]);
+        $user = $requete->fetch();
+
+        $requete = $conn->conbdd()->prepare("SELECT libelle FROM classe WHERE id_classe = :id");
+        $requete->execute(['id'=>$this->getClasse()]);
+        $classe = $requete->fetch();
+
+        header("Location: ../commande/commande.php?fournisseur=".$this->getFournisseur()."&ndevis=".$this->getNum()."&comment=Nouvelle Commande de ".$user['nom']. " ". $user['prenom']. " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.");
     }
 }

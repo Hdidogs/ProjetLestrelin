@@ -52,7 +52,7 @@ if (isset($_SESSION['id_user'])) {
         <thead>
             <tr>
                 <th>Date</th>
-                <th>quantité</th>
+                <th>Quantité</th>
                 <th>Pièce</th>
                 <th>Utilisateur</th>
                 <th>Classe</th>
@@ -118,8 +118,8 @@ if (isset($_SESSION['id_user'])) {
             <span class="close">&times;</span>
         </div>
         <div class="modal-content">
-            <input type="date" name="date">
-            <input type="number" placeholder="Quantité (m)" name="quantite">
+            <input type="date" name="date" required>
+            <input type="number" placeholder="Quantité (m)" name="quantite" required>
             <select name="piece">
                 <?php
                     $requete = $conn->conbdd()->query("SELECT id_piece, nom FROM piece");
