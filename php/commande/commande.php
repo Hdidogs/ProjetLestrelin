@@ -10,6 +10,8 @@ $mail = new PHPMailer(true);
 
 try {
 var_dump($_GET["fournisseur"]);
+    $comment = "Nouvelle Commande de ".$_GET['nom']. " " . $_GET['prenom']. " pour la classe " . $_GET['classe'] . ". Nous avons besoin de " . $_GET['forme'] . " " . $_GET['$materiau'] . " de " . $_GET['quantite'] . " mètres de long.";
+
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
@@ -50,8 +52,8 @@ var_dump($_GET["fournisseur"]);
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = $_GET['ndevis'];
-    $mail->Body = $_GET['comment'];
-    $mail->AltBody = $_GET['comment'];
+    $mail->Body = $comment;
+    $mail->AltBody = $comment;
 
     $mail->send();
     echo 'Message has been sent';
