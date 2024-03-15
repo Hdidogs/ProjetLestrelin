@@ -34,6 +34,30 @@ if (isset($_SESSION['id_user'])) {
     <a class="commandMatiere" href="commandeMatiere.php">Commande de Matière</a>
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
 </div>
+<div class="content">
+    <h2 style="text-align: center; width: 600px">Historique</h2>
+    <br>
+    <br>
+    <br>
+    <table id="historique">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>quantité</th>
+            <th>Pièce</th>
+            <th>Utilisateur</th>
+            <th>Classe</th>
+            <th>Matière</th>
+        </tr>
+        </thead>
+
+</div>
+
+<script>
+    $(document).ready( function () {
+        $('#historique').DataTable();
+    } );
+</script>
 </body>
 </html>
 
