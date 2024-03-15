@@ -225,7 +225,10 @@ class Matiere {
         $req = $conn->conbdd()->prepare("INSERT INTO commande (date, quantite, etat, num_devis, ref_classe, ref_user, ref_matiere, ref_fournisseur) VALUES (:date, :quantite, :etat, :num, :classe, :user, :matiere, :fournisseur)");
         $req->execute(['date'=>$this->getDate(), 'quantite'=>$this->getQuantite(), 'etat'=>$this->getEtat(), 'num'=>$this->getNum(), 'classe'=>$this->getClasse(), 'user'=>$this->getUser(), 'matiere'=>$this->getMatiere(), 'fournisseur'=>$this->getFournisseur()]);
 
-
+        $requete = $conn->conbdd()->prepare("SELECT mail FROM fournisseur WHERE id_fournisseur = :id");
+        $requete->execute(['id' =>$this->getFournisseur()]);
+        $result = $requete->fetch();
+        $mail = $result['mail'];
 
         $req= $conn->conbdd()->prepare("SELECT ref_materiau, ref_forme FROM matiere WHERE id_matiere = :id");
         $req->execute(['id'=>$this->getMatiere()]);
@@ -249,7 +252,7 @@ class Matiere {
         $requete->execute(['id'=>$this->getClasse()]);
         $classe = $requete->fetch();
 
-        header("Location: ../commande/commande.php");
-        header("Location: ?fournisseur=".$this->getFournisseur()."&ndevis=".$this->getNum()."&comment=Nouvelle Commande de ".$user['nom']. " ". $user['prenom']. " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.");
+        header("Location: ../commande/commande.php?fournisseur=".$mail."&ndevis=".$this->getNum()."&comment=Nouvelle Commande");
+        header("Location: ?fournisseur=".$mail."&ndevis=".$this->getNum()."&comment=Nouvelle Commande de ".$user['nom']. " ". $user['prenom']. " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.");
     }
 }
