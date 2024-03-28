@@ -1,5 +1,5 @@
 <?php
-include "Matiere.php";
+include ";
 
 if (array_key_exists("suppr", $_GET)) {
     $id = $_GET['id'];

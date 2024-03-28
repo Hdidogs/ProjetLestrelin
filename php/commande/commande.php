@@ -83,4 +83,8 @@ try {
     header("Location: ../../html/commandeMatiere.php");
 }
 
+<<<<<<< HEAD
 
+=======
+header("Location: ../../html/commandeMatiere.php");
+>>>>>>> dadb0d84acf8bff551ccb4f26c4b8f2d76b5e8e0
