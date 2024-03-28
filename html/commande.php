@@ -48,7 +48,7 @@ $nposte = $req->fetchAll();
 
         <div class="form-group">
             <label for="exampleFormControlSelect1">N°Poste :</label>
-            <select class="js-example-basic-multiple" name="states[]" multiple="multiple" name="numeroP">
+            <select class="js-example-basic-multiple" name="states[]" multiple="multiple" name="numeroP" style="width: 150px">
                 <?php foreach ($nposte as $liste) {
                     $req = $conn->conbdd()->prepare("SELECT ref_materiau, ref_forme FROM matiere WHERE id_matiere = :id");
                     $req->execute(["id"=>$liste['ref_matiere']]);

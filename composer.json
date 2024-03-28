@@ -1,6 +1,7 @@
 {
     "require": {
         "aspose-cloud/aspose-words-cloud": "^24.2",
-        "phpmailer/phpmailer": "^6.9"
+        "phpmailer/phpmailer": "^6.9",
+        "dompdf/dompdf": "^2.0"
     }
 }
