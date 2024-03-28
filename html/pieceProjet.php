@@ -24,8 +24,6 @@ $conn = new SQLConnexion();
 //} else {
 //    header("Location: ../html/connexion.html");
 //}
-$req = $conn->conbdd()->query("SELECT * FROM piece");
-$respieces = $req->fetchAll();
 
 if (isset($_GET['id'])) {
     $projet_id = $_GET['id'];
@@ -37,7 +35,10 @@ if (isset($_GET['id'])) {
     echo "Ce projet n'existe pas !!";
 }
 
-?>
+$req_piece = $conn->conbdd()->prepare("SELECT piece.id_piece , piece.nom AS nom_piece, piece.img AS img_piece FROM pieceprojet INNER JOIN piece ON pieceprojet.ref_piece = piece.id_piece WHERE pieceprojet.ref_projet = ?");
+$req_piece->execute([$projet_id]);
+$respieces = $req_piece->fetchAll();
+
 ?>
 <div class="side-bar-big">
     <a class="gestionMatiere" href="gestionMatiere.php">Gestion des Matière</a>
@@ -47,13 +48,13 @@ if (isset($_GET['id'])) {
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
 </div>
 
-<h1>Pieces du Projet<?php echo $nom_projet;?></h1>
+<h1>Pieces du Projet <?php echo $nom_projet;?></h1>
 
 <div class="content" style="">
     <?php foreach ($respieces as $piece) {?>
         <div class="case">
-                <h5><?=$piece["nom"]?></h5>
-                <img src="projetLestrelin/<?= $piece["img"]?>" alt="<?= $piece['img']?>">
+            <h5><?= $piece["nom_piece"] ?></h5>
+            <img src="../assets/images/<?= strtolower(str_replace(" ","_",$piece["img_piece"]))?>" alt="<?= $piece['img_piece']?>">
         </div>
     <?php }?>
 </div>

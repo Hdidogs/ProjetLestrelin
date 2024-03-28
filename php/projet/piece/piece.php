@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Vérifie si le téléchargement du fichier a réussi
         if ($_FILES['image']['error'] == 0) {
             // Définit le répertoire de destination pour les fichiers téléchargés
-            $target_dir = "../../assets/images/";
+            $target_dir = "../../../assets/images/";
             // Vérifie si le répertoire existe, sinon le crée
             if (!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = new SQLConnexion();
 
     $stmt = $conn->conbdd()->prepare("INSERT INTO piece (img, nom) VALUES (:img, :nom)");
-    $stmt->execute(["img" => $imagePath, "nom" => $nouveauNom]);
+    $stmt->execute(["img" => $nouveauNom, "nom" => $nouveauNom]);
 
     $piece = $conn->conbdd()->lastInsertId();
 
