@@ -130,7 +130,7 @@
                     </div>
                     <div class="modal-content">
                         <!-- Contenu du formulaire pour ajouter une nouvelle forme -->
-                        <input type="text" name="libelle" placeholder="Libellé">
+                        <input type="text" name="libelle" placeholder="Nom de la forme">
                         <input type="text" name="longueur" placeholder="Longueur">
                         <input type="text" name="largeur" placeholder="Largeur">
                         <input type="text" name="epaisseur" placeholder="Épaisseur">
@@ -180,6 +180,7 @@
                         $requete->execute([$libelle, $longueur, $largeur, $epaisseur, $diametre, $hauteur]);
                     }
                     ?>
+
 
                     <script type="text/javascript">
                         // JavaScript pour gérer l'affichage des modals et leur fermeture
@@ -245,21 +246,7 @@
                         }
 
                         // Fonction pour préremplir les champs texte lors du clic sur le bouton "Modifier"
-                        function prefillFields() {
-                            var libelle = "Valeur du libellé";
-                            var longueur = "Valeur de la longueur";
-                            var largeur = "Valeur de la largeur";
-                            var epaisseur = "Valeur de l'épaisseur";
-                            var diametre = "Valeur du diamètre";
-                            var hauteur = "Valeur de la hauteur";
 
-                            document.getElementsByName("libelle")[0].value = libelle;
-                            document.getElementsByName("longueur")[0].value = longueur;
-                            document.getElementsByName("largeur")[0].value = largeur;
-                            document.getElementsByName("epaisseur")[0].value = epaisseur;
-                            document.getElementsByName("diametre")[0].value = diametre;
-                            document.getElementsByName("hauteur")[0].value = hauteur;
-                        }
 
                         // Appeler la fonction pour préremplir les champs texte lors du chargement de la page
                         window.onload = function () {
