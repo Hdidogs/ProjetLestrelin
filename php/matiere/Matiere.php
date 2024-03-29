@@ -13,6 +13,13 @@ class Matiere
     private $fournisseur;
     private $num;
     private $etat;
+    private $ref_forme;
+    private $ref_materiau;
+    private $longueur;
+    private $hauteur;
+    private $epaisseur;
+    private $largeur;
+    private $diametre;
 
     function __construct(array $info)
     {
