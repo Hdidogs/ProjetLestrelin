@@ -122,7 +122,7 @@ $conn = new SQLConnexion();
 </div>
 
 <div id="modal-fournisseur" class="modal">
-    <form method="get" action="../php/matiere/traitementMatiere.php">
+    <form method="get" action="../php/entreprise/TraitementEntreprise.php">
         <div class="modal-header">
             <h1>Nouveau Fournisseur</h1>
             <span class="closeF">&times;</span>
@@ -136,7 +136,7 @@ $conn = new SQLConnexion();
         </div>
         <div class="modal-footer">
             <button class="btn" type="reset">Réinitialiser</button>
-            <button class="btn" name="commande" type="submit">Commander</button>
+            <button class="btn" name="add" type="submit">Ajouter</button>
         </div>
     </form>
 </div>

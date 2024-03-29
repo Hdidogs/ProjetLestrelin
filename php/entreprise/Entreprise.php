@@ -95,6 +95,6 @@ class Entreprise
         $req = $conn->conbdd()->prepare("INSERT INTO fournisseur (entreprise, mail, telephone) VALUES (:nom, :mail, :telephone)");
         $req->execute(['nom'=>$this->getNom(), 'mail'=>$this->getMail(), 'telephone'=>$this->getTel()]);
 
-
+        header("Location: ../../html/commandeMatiere.php");
     }
 }
