@@ -1,6 +1,5 @@
 <?php
 include "Matiere.php";
-include "../SQL/SQLConnexion.php";
 if (array_key_exists("suppr", $_GET)) {
     $id = $_GET['id'];
 

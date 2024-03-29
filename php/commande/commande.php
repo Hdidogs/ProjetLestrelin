@@ -46,14 +46,15 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = $_GET['ndevis'];
+    $mail->Subject = "Devis ". $_GET['ndevis'];
     $comment = "Nouvelle Commande de " . $_GET['nom'] . " " . $_GET['prenom'] . " pour la classe " . $_GET['classe'] . ". Nous avons besoin de " . $_GET['forme'] . " " . $_GET['materiau'] . " de " . $_GET['quantite'] . " mètres de long.";
 
     //Convert the HTML to a PDF
     $pdf->loadHtml($comment);
     $pdf->render();
     $output = $pdf->output();
-    $target_dir = "../../../assets/pdf/";
+    $target_dir = "../../assets/pdf/";
+
     if (!file_exists($target_dir)) {
         mkdir($target_dir, 0777, true);
     }
@@ -70,7 +71,7 @@ try {
     file_put_contents('devis.pdf', $output);
 
     //Attach the PDF file
-    $mail->addAttachment('../assets/pdf/devis.pdf');
+    $mail->addAttachment('../../assets/pdf/devis.pdf');
 
     $mail->Body = $comment;
     $mail->AltBody = $comment;
@@ -82,9 +83,3 @@ try {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     header("Location: ../../html/commandeMatiere.php");
 }
-
-<<<<<<< HEAD
-
-=======
-header("Location: ../../html/commandeMatiere.php");
->>>>>>> dadb0d84acf8bff551ccb4f26c4b8f2d76b5e8e0
