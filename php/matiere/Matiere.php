@@ -224,7 +224,7 @@ class Matiere
         header("Location: ../../html/debitMatiere.php");
     }
 
-    public function ajouter()
+    public function addForme()
     {
         $conn = new SQLConnexion();
 

@@ -6,104 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Gestion</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="../css/styles.css" />
 </head>
 
 <body>
-<div>
-    <?php
-    // Inclure le fichier de connexion à la base de données
-    include '../php/SQLConnexion.php';
-
-    session_start();
-    $conn = new SQLConnexion();
-
-    if (isset($_SESSION['id_user'])) {
-        $id_user = $_SESSION['id_user'];
-    } else {
-        header("Location: ../html/connexion.html");
-    }
-    ?>
-    <div class="side-bar-big">
-        <a class="gestionMatiere" href="gestionMatiere.php">Gestion des Matière</a>
-        <a class="gestionProjet" href="gestionProjet.php">Gestion des Projets</a>
-        <a class="debitMatiere" href="debitMatiere.php">Débit de Matière</a>
-        <a class="commandMatiere" href="commandeMatiere.php">Commande de Matière</a>
-        <a class="account" href="#">
-            <?= $_SESSION['nom'] . " " . $_SESSION['prenom'] ?>
-        </a>
-    </div>
-
-    <div class="side-bar-action">
-        <a href="#modal-nouveau-matiere" onclick="AjouterMatiere()">Ajouter Matière</a>
-        <a href="#modal-nouvelle-forme" onclick="afficherModalNouvelleForme()">Nouvelle Forme</a>
-        <a href="#modal-nouveau-materiau" onclick="afficherModalNouveauMateriau()">Nouveau Matériau</a>
-
-        <br>
-        <h4 class="side-bar-title">Trier</h4>
-    </div>
-
-    <div class="content">
+    <div>
         <?php
+        // Inclure le fichier de connexion à la base de données
+        include '../php/SQLConnexion.php';
 
-        $req = $conn->conbdd()->query("SELECT * FROM matiere");
-        $res = $req->fetchAll();
+        session_start();
+        $conn = new SQLConnexion();
 
-        foreach ($res as $matiere) {
-            ?>
-            <div class="case card">
-                <h5 class="card-title">
-                    <?php
-                    $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = ?");
-                    $requete->execute([$matiere['ref_materiau']]);
-                    $result = $requete->fetch();
-                    $materiau = $result['libelle'];
-
-                    $requete = $conn->conbdd()->prepare("SELECT libelle FROM forme WHERE id_forme = ?");
-                    $requete->execute([$matiere['ref_forme']]);
-                    $result = $requete->fetch();
-                    $forme = $result['libelle'];
-
-                    echo $forme . " en " . $materiau;
-                    ?>
-                </h5>
-                <?php if (!empty($matiere['longueur'])) { ?>
-                    <p class="card-text">Longueur:
-                        <?= $matiere['longueur'] ?>cm
-                    </p>
-                <?php } ?>
-                <?php if (!empty($matiere['hauteur'])) { ?>
-                    <p class="card-text">Hauteur:
-                        <?= $matiere['hauteur'] ?>cm
-                    </p>
-                <?php } ?>
-                <?php if (!empty($matiere['epaisseur'])) { ?>
-                    <p class="card-text">Épaisseur:
-                        <?= $matiere['epaisseur'] ?>cm
-                    </p>
-                <?php } ?>
-                <?php if (!empty($matiere['largeur'])) { ?>
-                    <p class="card-text">Largeur:
-                        <?= $matiere['largeur'] ?>cm
-                    </p>
-                <?php } ?>
-                <?php if (!empty($matiere['diametre'])) { ?>
-                    <p class="card-text">Diamètre:
-                        <?= $matiere['diametre'] ?>cm
-                    </p>
-                <?php } ?>
-                <input type="hidden" name="id" value="<?= $matiere['id_matiere'] ?>">
-                <a id="btn-edit" onclick="afficher(<?= $matiere['id_matiere'] ?>)" class="case-edit">Modifier</a>
-                <a id="btn-delete" onclick="afficherSupprimer(<?= $matiere['id_matiere'] ?>)"
-                   class="case-delete">Supprimer</a>
-            </div>
-            <?php
+        if (isset($_SESSION['id_user'])) {
+            $id_user = $_SESSION['id_user'];
+        } else {
+            header("Location: ../html/connexion.html");
         }
         ?>
-<<<<<<< HEAD
         <div class="side-bar-big">
             <a class="gestionMatiere" href="gestionMatiere.php">Gestion des Matière</a>
             <a class="gestionProjet" href="gestionProjet.php">Gestion des Projets</a>
@@ -176,66 +99,8 @@
                     <a id="btn-edit" onclick="afficher(<?= $matiere['id_matiere'] ?>)" class="case-edit">Modifier</a>
                     <a id="btn-delete" onclick="afficherSupprimer(<?= $matiere['id_matiere'] ?>)"
                         class="case-delete">Supprimer</a>
-=======
-        <!-- Modals -->
-        <!-- Ajouter Matière -->
-        <div id="modal-ajouter" class="modal">
-            <form method="post" action="../php/matiere/traitementMatiere.php">
-                <div class="modal-header">
-                    <h1>Ajouter</h1>
-                    <span class="close-ajouter">&times;</span>
->>>>>>> 67cda1d0bb692df09b3234267cd8ebc4b2312f76
                 </div>
-                <div class="modal-content">
-                    <!-- Contenu du formulaire pour ajouter une matière -->
-                </div>
-                <div class="modal-footer">
-                    <button type="reset">Réinitialiser</button>
-                    <button name="add" type="submit">Ajouter</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Nouvelle Forme -->
-        <div id="modal-nouvelle-forme" class="modal">
-            <form method="post" action="">
-                <div class="modal-header">
-                    <h1>Nouvelle Forme</h1>
-                    <span class="close-nouvelle-forme">&times;</span>
-                </div>
-                <div class="modal-content">
-                    <!-- Contenu du formulaire pour ajouter une nouvelle forme -->
-                    <input type="text" name="libelle" placeholder="Nom de la forme">
-                    <input type="text" name="longueur" placeholder="Longueur">
-                    <input type="text" name="largeur" placeholder="Largeur">
-                    <input type="text" name="epaisseur" placeholder="Épaisseur">
-                    <input type="text" name="diametre" placeholder="Diamètre">
-                    <input type="text" name="hauteur" placeholder="Hauteur">
-                </div>
-                <div class="modal-footer">
-                    <button type="reset">Réinitialiser</button>
-                    <button name="addForme" type="submit">Ajouter</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Nouveau Matériau -->
-        <div id="modal-nouveau-materiau" class="modal">
-            <form method="post" action="">
-                <div class="modal-header">
-                    <h1>Nouveau Matériau</h1>
-                    <span class="close-nouveau-materiau">&times;</span>
-                </div>
-                <div class="modal-content">
-                    <input type="text" name="libelleMateriau" placeholder="Libellé">
-                </div>
-                <div class="modal-footer">
-                    <button type="reset">Réinitialiser</button>
-                    <button name="addMateriau" type="submit">Ajouter</button>
-                </div>
-
                 <?php
-<<<<<<< HEAD
             }
             ?>
             <!-- Modals -->
@@ -279,101 +144,142 @@
                     </div>
                 </form>
             </div>
-=======
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addMateriau'])) {
-                    $libelleMateriau = $_POST['libelleMateriau'];
-                    $requete = $conn->conbdd()->prepare("INSERT INTO materiau (libelle) VALUES (?)");
-                    $requete->execute([$libelleMateriau]);
-                }
-                ?>
->>>>>>> 67cda1d0bb692df09b3234267cd8ebc4b2312f76
 
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addForme'])) {
-                    $libelle = $_POST['libelle'];
-                    $longueur = $_POST['longueur'];
-                    $largeur = $_POST['largeur'];
-                    $epaisseur = $_POST['epaisseur'];
-                    $diametre = $_POST['diametre'];
-                    $hauteur = $_POST['hauteur'];
+            <!-- Nouvelle Forme -->
+            <div id="modal-nouvelle-forme" class="modal">
+                <form method="post" action="">
+                    <div class="modal-header">
+                        <h1>Nouvelle Forme</h1>
+                        <span class="close-nouvelle-forme">&times;</span>
+                    </div>
+                    <div class="modal-content">
+                        <!-- Contenu du formulaire pour ajouter une nouvelle forme -->
+                        <input type="text" name="libelle" placeholder="Nom de la forme">
+                        <input type="checkbox" name="largeur" placeholder="Largeur" id="largeur" values="1">
+                        <label for="largeur">Largeur</label>
+                        <input type="checkbox" name="epaisseur" id="epaisseur" values="1">
+                        <label for="epaisseur">Épaisseur</label>
+                        <input type="checkbox" name="diametre" id="diametre" values="1">
+                        <label for="diametre">Diamètre</label>
+                        <input type="checkbox" name="hauteur" id="hauteur" values="1">
+                        <label for="hauteur">Hauteur</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset">Réinitialiser</button>
+                        <button name="addForme" type="submit">Ajouter</button>
+                    </div>
+                </form>
+            </div>
 
-                    $requete = $conn->conbdd()->prepare("INSERT INTO forme (libelle, longueur, largeur, epaisseur, diametre, hauteur) VALUES (?, ?, ?, ?, ?, ?)");
-                    $requete->execute([$libelle, $longueur, $largeur, $epaisseur, $diametre, $hauteur]);
-                }
-                ?>
+            <!-- Nouveau Matériau -->
+            <div id="modal-nouveau-materiau" class="modal">
+                <form method="post" action="">
+                    <div class="modal-header">
+                        <h1>Nouveau Matériau</h1>
+                        <span class="close-nouveau-materiau">&times;</span>
+                    </div>
+                    <div class="modal-content">
+                        <input type="text" name="libelleMateriau" placeholder="Libellé">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset">Réinitialiser</button>
+                        <button name="addMateriau" type="submit">Ajouter</button>
+                    </div>
 
-
-                <script type="text/javascript">
-                    // JavaScript pour gérer l'affichage des modals et leur fermeture
-                    var modalAjouter = document.getElementById("modal-ajouter");
-                    var modalNouvelleForme = document.getElementById("modal-nouvelle-forme");
-                    var modalNouveauMateriau = document.getElementById("modal-nouveau-materiau");
-
-                    var spanAjouter = document.getElementsByClassName("close-ajouter")[0];
-                    var spanNouvelleForme = document.getElementsByClassName("close-nouvelle-forme")[0];
-                    var spanNouveauMateriau = document.getElementsByClassName("close-nouveau-materiau")[0];
-
-                    function ajouterMatiere() {
-                        modalAjouter.style.display = "block";
+                    <?php
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addMateriau'])) {
+                        $libelleMateriau = $_POST['libelleMateriau'];
+                        $requete = $conn->conbdd()->prepare("INSERT INTO materiau (libelle) VALUES (?)");
+                        $requete->execute([$libelleMateriau]);
                     }
+                    ?>
 
-                    // Fonction pour afficher le modal pour ajouter une matière
-                    function afficherModalAjouter() {
-                        modalAjouter.style.display = "block";
+                    <?php
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addForme'])) {
+                        $libelle = $_POST['libelle'];
+                        $largeur = $_POST['largeur'];
+                        $epaisseur = $_POST['epaisseur'];
+                        $diametre = $_POST['diametre'];
+                        $hauteur = $_POST['hauteur'];
+
+                        $requete = $conn->conbdd()->prepare("INSERT INTO forme (libelle, longueur, largeur, epaisseur, diametre, hauteur) VALUES (?, ?, ?, ?, ?, ?)");
+                        var_dump($requete);
                     }
+                    //$requete->execute([$libelle, 1, $largeur, $epaisseur, $diametre, $hauteur]);
+                    ?>
 
-                    // Fonction pour afficher le modal pour ajouter une nouvelle forme
-                    function afficherModalNouvelleForme() {
-                        modalNouvelleForme.style.display = "block";
-                    }
 
-                    // Fonction pour afficher le modal pour ajouter un nouveau matériau
-                    function afficherModalNouveauMateriau() {
-                        modalNouveauMateriau.style.display = "block";
-                    }
+                    <script type="text/javascript">
+                        // JavaScript pour gérer l'affichage des modals et leur fermeture
+                        var modalAjouter = document.getElementById("modal-ajouter");
+                        var modalNouvelleForme = document.getElementById("modal-nouvelle-forme");
+                        var modalNouveauMateriau = document.getElementById("modal-nouveau-materiau");
 
-                    // Fonction pour fermer le modal pour ajouter une matière
-                    spanAjouter.onclick = function () {
-                        modalAjouter.style.display = "none";
-                    }
+                        var spanAjouter = document.getElementsByClassName("close-ajouter")[0];
+                        var spanNouvelleForme = document.getElementsByClassName("close-nouvelle-forme")[0];
+                        var spanNouveauMateriau = document.getElementsByClassName("close-nouveau-materiau")[0];
 
-                    // Fonction pour fermer le modal pour ajouter une nouvelle forme
-                    spanNouvelleForme.onclick = function () {
-                        modalNouvelleForme.style.display = "none";
-                    }
+                        function ajouterMatiere() {
+                            modalAjouter.style.display = "block";
+                        }
 
-                    // Fonction pour fermer le modal pour ajouter un nouveau matériau
-                    spanNouveauMateriau.onclick = function () {
-                        modalNouveauMateriau.style.display = "none";
-                    }
+                        // Fonction pour afficher le modal pour ajouter une matière
+                        function afficherModalAjouter() {
+                            modalAjouter.style.display = "block";
+                        }
 
-                    function afficher(id) {
-                        // Récupérer les informations de la matière en fonction de son identifiant unique
-                        var matiere = document.getElementById('matiere' + id);
+                        // Fonction pour afficher le modal pour ajouter une nouvelle forme
+                        function afficherModalNouvelleForme() {
+                            modalNouvelleForme.style.display = "block";
+                        }
 
-                        // Afficher les informations dans une alerte (vous pouvez personnaliser cette partie selon vos besoins)
-                        // alert("Informations sur la matière :\n" + matiere.innerHTML);
-                    }
+                        // Fonction pour afficher le modal pour ajouter un nouveau matériau
+                        function afficherModalNouveauMateriau() {
+                            modalNouveauMateriau.style.display = "block";
+                        }
 
-                    // Fermer le modal lorsqu'on clique en dehors de la fenêtre modale
-                    window.onclick = function (event) {
-                        if (event.target == modalAjouter) {
+                        // Fonction pour fermer le modal pour ajouter une matière
+                        spanAjouter.onclick = function () {
                             modalAjouter.style.display = "none";
-                        } else if (event.target == modalNouvelleForme) {
+                        }
+
+                        // Fonction pour fermer le modal pour ajouter une nouvelle forme
+                        spanNouvelleForme.onclick = function () {
                             modalNouvelleForme.style.display = "none";
-                        } else if (event.target == modalNouveauMateriau) {
+                        }
+
+                        // Fonction pour fermer le modal pour ajouter un nouveau matériau
+                        spanNouveauMateriau.onclick = function () {
                             modalNouveauMateriau.style.display = "none";
                         }
-                    }
 
-                    // Fonction pour préremplir les champs texte lors du clic sur le bouton "Modifier"
+                        function afficher(id) {
+                            // Récupérer les informations de la matière en fonction de son identifiant unique
+                            var matiere = document.getElementById('matiere' + id);
+
+                            // Afficher les informations dans une alerte (vous pouvez personnaliser cette partie selon vos besoins)
+                            // alert("Informations sur la matière :\n" + matiere.innerHTML);
+                        }
+
+                        // Fermer le modal lorsqu'on clique en dehors de la fenêtre modale
+                        window.onclick = function (event) {
+                            if (event.target == modalAjouter) {
+                                modalAjouter.style.display = "none";
+                            } else if (event.target == modalNouvelleForme) {
+                                modalNouvelleForme.style.display = "none";
+                            } else if (event.target == modalNouveauMateriau) {
+                                modalNouveauMateriau.style.display = "none";
+                            }
+                        }
+
+                        // Fonction pour préremplir les champs texte lors du clic sur le bouton "Modifier"
 
 
-                    // Appeler la fonction pour préremplir les champs texte lors du chargement de la page
-                    window.onload = function () {
-                        prefillFields();
-                    }
-                </script>
+                        // Appeler la fonction pour préremplir les champs texte lors du chargement de la page
+                        window.onload = function () {
+                            prefillFields();
+                        }
+                    </script>
 
 </body>
 
