@@ -167,7 +167,19 @@
                     }
                     ?>
 
+                    <?php
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addForme'])) {
+                        $libelle = $_POST['libelle'];
+                        $longueur = $_POST['longueur'];
+                        $largeur = $_POST['largeur'];
+                        $epaisseur = $_POST['epaisseur'];
+                        $diametre = $_POST['diametre'];
+                        $hauteur = $_POST['hauteur'];
 
+                        $requete = $conn->conbdd()->prepare("INSERT INTO forme (libelle, longueur, largeur, epaisseur, diametre, hauteur) VALUES (?, ?, ?, ?, ?, ?)");
+                        $requete->execute([$libelle, $longueur, $largeur, $epaisseur, $diametre, $hauteur]);
+                    }
+                    ?>
 
                     <script type="text/javascript">
                         // JavaScript pour gérer l'affichage des modals et leur fermeture
