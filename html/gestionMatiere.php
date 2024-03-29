@@ -103,6 +103,80 @@
             <?php
         }
         ?>
+<<<<<<< HEAD
+        <div class="side-bar-big">
+            <a class="gestionMatiere" href="gestionMatiere.php">Gestion des Matière</a>
+            <a class="gestionProjet" href="gestionProjet.php">Gestion des Projets</a>
+            <a class="debitMatiere" href="debitMatiere.php">Débit de Matière</a>
+            <a class="commandMatiere" href="commandeMatiere.php">Commande de Matière</a>
+            <a class="account" href="#">
+                <?= $_SESSION['nom'] . " " . $_SESSION['prenom'] ?>
+            </a>
+        </div>
+
+        <div class="side-bar-action">
+            <a href="#modal-ajouter" onclick="afficherModalAjouter()">Ajouter</a>
+            <a href="#modal-nouvelle-forme" onclick="afficherModalNouvelleForme()">Nouvelle Forme</a>
+            <a href="#modal-nouveau-materiau" onclick="afficherModalNouveauMateriau()">Nouveau Matériau</a>
+
+            <br>
+            <h4 class="side-bar-title">Trier</h4>
+        </div>
+
+        <div class="content">
+            <?php
+
+            $req = $conn->conbdd()->query("SELECT * FROM matiere");
+            $res = $req->fetchAll();
+
+            foreach ($res as $matiere) {
+                ?>
+                <div class="case card">
+                    <h5 class="card-title">
+                        <?php
+                        $requete = $conn->conbdd()->prepare("SELECT libelle FROM materiau WHERE id_materiau = ?");
+                        $requete->execute([$matiere['ref_materiau']]);
+                        $result = $requete->fetch();
+                        $materiau = $result['libelle'];
+
+                        $requete = $conn->conbdd()->prepare("SELECT libelle FROM forme WHERE id_forme = ?");
+                        $requete->execute([$matiere['ref_forme']]);
+                        $result = $requete->fetch();
+                        $forme = $result['libelle'];
+
+                        echo $forme . " en " . $materiau;
+                        ?>
+                    </h5>
+                    <?php if (!empty($matiere['longueur'])) { ?>
+                        <p class="card-text">Longueur:
+                            <?= $matiere['longueur'] ?>cm
+                        </p>
+                    <?php } ?>
+                    <?php if (!empty($matiere['hauteur'])) { ?>
+                        <p class="card-text">Hauteur:
+                            <?= $matiere['hauteur'] ?>cm
+                        </p>
+                    <?php } ?>
+                    <?php if (!empty($matiere['epaisseur'])) { ?>
+                        <p class="card-text">Épaisseur:
+                            <?= $matiere['epaisseur'] ?>cm
+                        </p>
+                    <?php } ?>
+                    <?php if (!empty($matiere['largeur'])) { ?>
+                        <p class="card-text">Largeur:
+                            <?= $matiere['largeur'] ?>cm
+                        </p>
+                    <?php } ?>
+                    <?php if (!empty($matiere['diametre'])) { ?>
+                        <p class="card-text">Diamètre:
+                            <?= $matiere['diametre'] ?>cm
+                        </p>
+                    <?php } ?>
+                    <input type="hidden" name="id" value="<?= $matiere['id_matiere'] ?>">
+                    <a id="btn-edit" onclick="afficher(<?= $matiere['id_matiere'] ?>)" class="case-edit">Modifier</a>
+                    <a id="btn-delete" onclick="afficherSupprimer(<?= $matiere['id_matiere'] ?>)"
+                        class="case-delete">Supprimer</a>
+=======
         <!-- Modals -->
         <!-- Ajouter Matière -->
         <div id="modal-ajouter" class="modal">
@@ -110,6 +184,7 @@
                 <div class="modal-header">
                     <h1>Ajouter</h1>
                     <span class="close-ajouter">&times;</span>
+>>>>>>> 67cda1d0bb692df09b3234267cd8ebc4b2312f76
                 </div>
                 <div class="modal-content">
                     <!-- Contenu du formulaire pour ajouter une matière -->
@@ -160,12 +235,58 @@
                 </div>
 
                 <?php
+<<<<<<< HEAD
+            }
+            ?>
+            <!-- Modals -->
+            <!-- Ajouter Matière -->
+            <div id="modal-ajouter" class="modal">
+                <form method="post" action="../php/matiere/traitementMatiere.php">
+                    <div class="modal-header">
+                        <h1>Ajouter</h1>
+                        <span class="close-ajouter">&times;</span>
+                    </div>
+                    <div class="modal-content">
+                        <select name="materiau" id="materiau">
+                            <option value="">Sélectionner un matériau</option>
+                            <?php
+                            $requete = $conn->conbdd()->query("SELECT * FROM materiau");
+                            $result = $requete->fetchAll();
+                            foreach ($result as $materiau) {
+                                echo "<option value='" . $materiau['id_materiau'] . "'>" . $materiau['libelle'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="forme" id="forme">
+                            <option value="">Sélectionner une forme</option>
+                            <?php
+                            $requete = $conn->conbdd()->query("SELECT * FROM forme");
+                            $result = $requete->fetchAll();
+                            foreach ($result as $forme) {
+                                echo "<option value='" . $forme['id_forme'] . "'>" . $forme['libelle'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <input type="text" name="longueur" placeholder="Longueur">
+                        <input type="text" name="largeur" placeholder="Largeur">
+                        <input type="text" name="epaisseur" placeholder="Épaisseur">
+                        <input type="text" name="diametre" placeholder="Diamètre">
+                        <input type="text" name="hauteur" placeholder="Hauteur">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset">Réinitialiser</button>
+                        <button name="add" type="submit">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+=======
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addMateriau'])) {
                     $libelleMateriau = $_POST['libelleMateriau'];
                     $requete = $conn->conbdd()->prepare("INSERT INTO materiau (libelle) VALUES (?)");
                     $requete->execute([$libelleMateriau]);
                 }
                 ?>
+>>>>>>> 67cda1d0bb692df09b3234267cd8ebc4b2312f76
 
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addForme'])) {
