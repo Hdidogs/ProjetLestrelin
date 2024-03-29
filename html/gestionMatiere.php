@@ -38,7 +38,7 @@
         </div>
 
         <div class="side-bar-action">
-            <a href="#modal-nouveau-matiere" onclick="AjouterMatiere()">Ajouter Matière</a>
+            <a href="#modal-ajouter" onclick="afficherModalAjouter()">Ajouter</a>
             <a href="#modal-nouvelle-forme" onclick="afficherModalNouvelleForme()">Nouvelle Forme</a>
             <a href="#modal-nouveau-materiau" onclick="afficherModalNouveauMateriau()">Nouveau Matériau</a>
 
@@ -112,7 +112,31 @@
                         <span class="close-ajouter">&times;</span>
                     </div>
                     <div class="modal-content">
-                        <!-- Contenu du formulaire pour ajouter une matière -->
+                        <select name="materiau" id="materiau">
+                            <option value="">Sélectionner un matériau</option>
+                            <?php
+                            $requete = $conn->conbdd()->query("SELECT * FROM materiau");
+                            $result = $requete->fetchAll();
+                            foreach ($result as $materiau) {
+                                echo "<option value='" . $materiau['id_materiau'] . "'>" . $materiau['libelle'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="forme" id="forme">
+                            <option value="">Sélectionner une forme</option>
+                            <?php
+                            $requete = $conn->conbdd()->query("SELECT * FROM forme");
+                            $result = $requete->fetchAll();
+                            foreach ($result as $forme) {
+                                echo "<option value='" . $forme['id_forme'] . "'>" . $forme['libelle'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <input type="text" name="longueur" placeholder="Longueur">
+                        <input type="text" name="largeur" placeholder="Largeur">
+                        <input type="text" name="epaisseur" placeholder="Épaisseur">
+                        <input type="text" name="diametre" placeholder="Diamètre">
+                        <input type="text" name="hauteur" placeholder="Hauteur">
                     </div>
                     <div class="modal-footer">
                         <button type="reset">Réinitialiser</button>
