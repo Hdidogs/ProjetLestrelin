@@ -30,6 +30,7 @@ class Matiere
         }
     }
 
+
     /**
      * @return mixed
      */
@@ -190,7 +191,69 @@ class Matiere
         $this->etat = $etat;
     }
 
-    public function supprimer()
+    public function getLargeur()
+    {
+        return $this->largeur;
+    }
+
+    public function setLargeur($largeur): void
+    {
+        $this->largeur = $largeur;
+    }
+
+    public function getHauteur()
+    {
+        return $this->hauteur;
+    }
+
+    public function setHauteur($hauteur): void
+    {
+        $this->hauteur = $hauteur;
+    }
+
+    public function getLongueur()
+    {
+        return $this->longueur;
+    }
+
+    public function setLongueur($longueur): void
+    {
+        $this->longueur = $longueur;
+    }
+
+    public function getEpaisseur()
+    {
+        return $this->epaisseur;
+    }
+
+    public function setEpaisseur($epaisseur): void
+    {
+        $this->epaisseur = $epaisseur;
+    }
+
+    public function getDiametre()
+    {
+        return $this->diametre;
+    }
+
+    public function setDiametre($diametre): void
+    {
+        $this->diametre = $diametre;
+    }
+
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    public function setNom($nom): void
+    {
+        $this->nom = $nom;
+    }
+
+
+
+    public function supprimer()}
     {
         $conn = new SQLConnexion();
         $req = $conn->conbdd()->prepare("DELETE FROM debit WHERE ref_matiere = :id");
@@ -226,13 +289,13 @@ class Matiere
 
     public function addForme()
     {
+
         $conn = new SQLConnexion();
-
-        $req = $conn->conbdd()->prepare("INSERT INTO matiere (nom, unite, stock, seuil, ref_classe) VALUES (:nom, :unite, :stock, :seuil, :classe)");
-        $req->execute(['nom' => $this->getNom(), 'unite' => $this->getUnite(), 'stock' => $this->getStock(), 'seuil' => $this->getSeuil(), 'classe' => $this->getClasse()]);
-
+        $req = $conn->conbdd()->prepare("INSERT INTO forme (libelle, longeur, largeur, epaisseur, diametre, hauteur) VALUES (:libelle, :longeur, :largeur, :epaisseur, :diametre, :hauteur)");
+        $req->execute(['libelle' => $this->getNom(), 'longeur' => $this->getLongueur(), 'largeur' => $this->getLargeur(), 'epaisseur' => $this->getEpaisseur(), 'diametre' => $this->getDiametre(), 'hauteur' => $this->getHauteur()]);
         header("Location: ../../html/gestionMatiere.php");
-    }
+    }   
+
 
     public function modifier()
     {
