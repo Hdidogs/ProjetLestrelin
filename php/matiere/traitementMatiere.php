@@ -50,7 +50,16 @@ if (array_key_exists("suppr", $_GET)) {
         'classe' => $_GET['classe']
     ]);
     $matiere->modifier();
+} else if (array_key_exists("addForme", $_GET)) {
+    $matiere = new Matiere([
+        'id' => $_GET['id'],
+        'forme' => $_GET['forme'],
+        'largeur' => $_GET['largeur'],
+        'hauteur' => $_GET['hauteur'],
+        'longueur' => $_GET['longueur'],
+        'epaisseur' => $_GET['epaisseur'],
+        'diametre' => $_GET['diametre']
+    ]);
 }
 
 header('Location: ../../index.php?page=matiere');
-?>
