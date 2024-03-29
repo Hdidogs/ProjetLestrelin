@@ -12,6 +12,13 @@ class Matiere {
     private $fournisseur;
     private $num;
     private $etat;
+    private $ref_forme;
+    private $ref_materiau;
+    private $longueur;
+    private $hauteur;
+    private $epaisseur;
+    private $largeur;
+    private $diametre;
 
     function __construct(array $info) {
         $this->hydrate($info);
@@ -185,6 +192,127 @@ class Matiere {
     public function setEtat($etat): void
     {
         $this->etat = $etat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRefForme()
+    {
+        return $this->ref_forme;
+    }
+
+    /**
+     * @param mixed $ref_forme
+     */
+    public function setRefForme($ref_forme): void
+    {
+        $this->ref_forme = $ref_forme;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRefMateriau()
+    {
+        return $this->ref_materiau;
+    }
+
+    /**
+     * @param mixed $ref_materiau
+     */
+    public function setRefMateriau($ref_materiau): void
+    {
+        $this->ref_materiau = $ref_materiau;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongueur()
+    {
+        return $this->longueur;
+    }
+
+    /**
+     * @param mixed $longueur
+     */
+    public function setLongueur($longueur): void
+    {
+        $this->longueur = $longueur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHauteur()
+    {
+        return $this->hauteur;
+    }
+
+    /**
+     * @param mixed $hauteur
+     */
+    public function setHauteur($hauteur): void
+    {
+        $this->hauteur = $hauteur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEpaisseur()
+    {
+        return $this->epaisseur;
+    }
+
+    /**
+     * @param mixed $epaisseur
+     */
+    public function setEpaisseur($epaisseur): void
+    {
+        $this->epaisseur = $epaisseur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLargeur()
+    {
+        return $this->largeur;
+    }
+
+    /**
+     * @param mixed $largeur
+     */
+    public function setLargeur($largeur): void
+    {
+        $this->largeur = $largeur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDiametre()
+    {
+        return $this->diametre;
+    }
+
+    /**
+     * @param mixed $diametre
+     */
+    public function setDiametre($diametre): void
+    {
+        $this->diametre = $diametre;
+    }
+
+    public function ajouter()
+    {
+        $conn = new SQLConnexion();
+        $req = $conn->conbdd()->prepare("INSERT INTO matiere (`ref_materiau`, `ref_forme`, `longueur`, `hauteur`, `epaisseur`, `largeur`, `diametre`) VALUES (:materiau, : forme, :longueur, :hauteur, :epaisseur, :largeur, :diametre)");
+        $req->execute(['materiau'=>$this->getRefMateriau(), 'forme'=>$this->getRefForme(), 'longueur'=>$this->getLongueur(), 'hauteur'=>$this->getHauteur(),'epaisseur'=>$this->getEpaisseur() , 'largeur'=>$this->getLargeur(), 'diametre'=>$this->getDiametre()]);
+
+        header("Location: ../../html/gestionMatiere.php");
     }
 
     public function supprimer() {
