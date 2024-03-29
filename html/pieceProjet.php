@@ -48,7 +48,9 @@ $respieces = $req_piece->fetchAll();
     <a class="account" href="#"><?=$_SESSION['nom'] . " " . $_SESSION['prenom']?></a>
 </div>
 
-<h1>Pieces du Projet <?php echo $nom_projet;?></h1>
+<div class="content">
+    <h1>Pieces du Projet <?php echo $nom_projet;?></h1>
+</div>
 
 <div class="content" style="">
     <?php foreach ($respieces as $piece) {?>

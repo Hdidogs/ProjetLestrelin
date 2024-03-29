@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="../css/styles.css"/>
 </head>
 <body>
-<<<<<<< HEAD
-=======
-<div>
->>>>>>> bded785111861ea90c17cdc577201fc4f30f5c64
 <?php
 // Inclure le fichier de connexion à la base de données
 include '../php/SQLConnexion.php';
@@ -84,9 +80,6 @@ foreach ($res as $matiere) {
         <a id="btn-edit" onclick="afficher(<?= $matiere['id_matiere'] ?>)" class="case-edit">Modifier</a>
         <a id="btn-delete" onclick="afficherSupprimer(<?= $matiere['id_matiere'] ?>)" class="case-delete">Supprimer</a>
         </div>
-<<<<<<< HEAD
-        <?php
-=======
 
         <input id="modifId" name="id" >
         <div class="modal-content">
@@ -146,60 +139,9 @@ foreach ($res as $matiere) {
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-    var modal = document.getElementById("modal-edit");
-    var modalAjouter = document.getElementById("modal-edit");
-    var modalSupprimer = document.getElementById("modal-suppr");
-
-    var span = document.getElementsByClassName("close")[0];
-    var spanAjouter = document.getElementsByClassName("close-ajouter")[0];
-    var spanSupprimer = document.getElementsByClassName("close-supprimer")[0];
-
-    function afficher(id) {
-        modal.style.display = "block";
-
-        $("#modifId").val(id)
-
-        // Centrer la pop-up au milieu de l'écran
-        modal.style.transform = "translate(-50%, -50%)";
-        modal.style.top = "50%";
-        modal.style.left = "50%";
-    }
-
-    function afficherSupprimer(id) {
-        modalSupprimer.style.display = "block";
-
-        $("#supprId").val(id)
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    spanAjouter.onclick = function() {
-        modalAjouter.style.display = "none";
-    }
-
-    spanSupprimer.onclick = function() {
-        modalSupprimer.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        } else if (event.target == modalSupprimer) {
-            modalSupprimer.style.display = "none";
-        } else if (event.target == modalAjouter) {
-            modalAjouter.style.display = "none";
->>>>>>> bded785111861ea90c17cdc577201fc4f30f5c64
-        }
-        ?>
-        </div>
-
         <!-- Modals -->
 <!-- Ajouter Matière -->
-<div id="modal-ajouter" class="modal">
+    <div id="modal-ajouter" class="modal">
             <form method="post" action="../php/matiere/traitementMatiere.php">
                 <div class="modal-header">
                     <h1>Ajouter</h1>
@@ -421,6 +363,9 @@ foreach ($res as $matiere) {
                                         prefillFields();
                                     }
                                     </script>
-
+                    </div>
+                </form>
+               </div>
                                     </body>
+
                                     </html>
