@@ -198,7 +198,7 @@ div.content {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.close {
+.close, .closeF  {
     color: #aaa;
     float: right;
     font-size: 28px;

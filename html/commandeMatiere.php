@@ -39,6 +39,7 @@ $conn = new SQLConnexion();
 
 <div class="side-bar-action">
     <a onclick="afficher()">Nouvelle Commande</a>
+    <a onclick="afficherFournisseur()">Nouveau Fournisseur</a>
 </div>
 
 <div class="content">
@@ -118,6 +119,26 @@ $conn = new SQLConnexion();
         ?>
         </tbody>
     </table>
+</div>
+
+<div id="modal-fournisseur" class="modal">
+    <form method="get" action="../php/matiere/traitementMatiere.php">
+        <div class="modal-header">
+            <h1>Nouveau Fournisseur</h1>
+            <span class="closeF">&times;</span>
+        </div>
+        <div class="modal-content">
+            <input type="text" name="nom" placeholder="Nom de L'Entreprise">
+            <br>
+            <input type="email" name="mail" placeholder="Adresse Mail">
+            <br>
+            <input type="text" name="tel" placeholder="Numéro de Téléphone">
+        </div>
+        <div class="modal-footer">
+            <button class="btn" type="reset">Réinitialiser</button>
+            <button class="btn" name="commande" type="submit">Commander</button>
+        </div>
+    </form>
 </div>
 
 <div id="modal-commande" class="modal">
@@ -202,9 +223,16 @@ $conn = new SQLConnexion();
 
 <script>
     var modal = document.getElementById("modal-commande");
+    var modalF = document.getElementById("modal-fournisseur");
+
     var span = document.getElementsByClassName("close")[0];
+    var spanF = document.getElementsByClassName("closeF")[0];
 
     function afficher() {
+        if (modalF.style.display === "block") {
+            modalF.style.display = "none";
+        }
+
         modal.style.display = "block";
 
         // Centrer la pop-up au milieu de l'écran
@@ -213,13 +241,32 @@ $conn = new SQLConnexion();
         modal.style.left = "50%";
     }
 
+    function afficherFournisseur() {
+        if (modal.style.display === "block") {
+            modal.style.display = "none";
+        }
+
+        modalF.style.display = "block";
+
+        // Centrer la pop-up au milieu de l'écran
+        modalF.style.transform = "translate(-50%, -50%)";
+        modalF.style.top = "50%";
+        modalF.style.left = "50%";
+    }
+
     span.onclick = function() {
         modal.style.display = "none";
+    }
+
+    spanF.onclick = function() {
+        modalF.style.display = "none";
     }
 
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+        } else if (event.target == modalF) {
+            modalF.style.display = "none";
         }
     }
 

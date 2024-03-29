@@ -172,11 +172,14 @@
                             <?= $matiere['diametre'] ?>cm
                         </p>
                     <?php } ?>
+
                     <input type="hidden" name="id" value="<?= $matiere['id_matiere'] ?>">
                     <a id="btn-edit" onclick="afficher(<?= $matiere['id_matiere'] ?>)" class="case-edit">Modifier</a>
                     <a id="btn-delete" onclick="afficherSupprimer(<?= $matiere['id_matiere'] ?>)"
                         class="case-delete">Supprimer</a>
-=======
+                    <?php
+                    }
+                    ?>
         <!-- Modals -->
         <!-- Ajouter Matière -->
         <div id="modal-ajouter" class="modal">
@@ -184,7 +187,6 @@
                 <div class="modal-header">
                     <h1>Ajouter</h1>
                     <span class="close-ajouter">&times;</span>
->>>>>>> 67cda1d0bb692df09b3234267cd8ebc4b2312f76
                 </div>
                 <div class="modal-content">
                     <!-- Contenu du formulaire pour ajouter une matière -->
@@ -234,10 +236,7 @@
                     <button name="addMateriau" type="submit">Ajouter</button>
                 </div>
 
-                <?php
-<<<<<<< HEAD
-            }
-            ?>
+
             <!-- Modals -->
             <!-- Ajouter Matière -->
             <div id="modal-ajouter" class="modal">
@@ -279,16 +278,15 @@
                     </div>
                 </form>
             </div>
-=======
+                <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addMateriau'])) {
                     $libelleMateriau = $_POST['libelleMateriau'];
                     $requete = $conn->conbdd()->prepare("INSERT INTO materiau (libelle) VALUES (?)");
                     $requete->execute([$libelleMateriau]);
                 }
-                ?>
->>>>>>> 67cda1d0bb692df09b3234267cd8ebc4b2312f76
 
-                <?php
+
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addForme'])) {
                     $libelle = $_POST['libelle'];
                     $longueur = $_POST['longueur'];
@@ -376,5 +374,4 @@
                 </script>
 
 </body>
-
 </html>
