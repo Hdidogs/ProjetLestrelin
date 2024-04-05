@@ -23,7 +23,7 @@
         if (isset($_SESSION['id_user'])) {
             $id_user = $_SESSION['id_user'];
         } else {
-            header("Location: ../html/connexion.html");
+            header("Location: connexion.html");
         }
         ?>
         <div class="side-bar-big">
