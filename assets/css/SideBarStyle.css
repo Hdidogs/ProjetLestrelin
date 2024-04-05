@@ -1,0 +1,10 @@
+html,
+body {
+    height: 100%;
+    background-color: #eaeaea;
+}
+
+.nav-link:hover {
+    transform: scale(1.02);
+}
+
