@@ -56,7 +56,7 @@ $respieces = $req_piece->fetchAll();
     <?php foreach ($respieces as $piece) {?>
         <div class="case">
             <h5><?= $piece["nom_piece"] ?></h5>
-            <img src="../assets/images/<?= strtolower(str_replace(" ","_",$piece["img_piece"]))?>" alt="<?= $piece['img_piece']?>">
+            <img src="../../assets/images/<?= strtolower(str_replace(" ","_",$piece["img_piece"]))?>" alt="<?= $piece['img_piece']?>">
         </div>
     <?php }?>
 </div>

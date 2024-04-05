@@ -121,7 +121,7 @@ $resProjet = $req->fetchAll();
     <div class="case">
         <a href="pieceProjet.php?id=<?=$projet["id_projet"]?>">
         <h5><?=$projet["nom"]?></h5>
-        <img src="projetLestrelin/<?= $projet["img"]?>"/>
+        <img src="../../assets/images/<?= $projet["img"]?>"/>
         </a>
     </div>
     <?php }?>
