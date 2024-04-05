@@ -9,13 +9,12 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
 </head>
 
 <body>
     <div>
         <?php
-        // Inclure le fichier de connexion à la base de données
         include '../../src/bdd/SqlConnexion.php';
 
         session_start();
