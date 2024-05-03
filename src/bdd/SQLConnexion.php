@@ -1,24 +1,27 @@
 <?php
 
-class SQLConnexion {
+class SQLConnexion
+{
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $bddname = "gestionStock";
+        $bddname = "sak_estrelin";
 
         try {
-            $this->conn = new PDO("mysql:host=$servername;dbname=".$bddname, $username, $password);
+            $this->conn = new PDO("mysql:host=$servername;dbname=" . $bddname, $username, $password);
 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
 
         }
     }
 
-    public function conbdd(): PDO {
+    public function conbdd(): PDO
+    {
         return $this->conn;
     }
 }

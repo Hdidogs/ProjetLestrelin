@@ -1,9 +1,13 @@
 <?php
-
 namespace matiere;
+ob_start();
+include "../../model/Mail.php";
+use Mail;
 use SQLConnexion;
-
 include "../../bdd/SQLConnexion.php";
+include "../../model/Exel.php";
+use Exel;
+
 
 class Matiere
 {
@@ -334,6 +338,13 @@ class Matiere
         header("Location: ../../../vue/main/debitMatiere.php");
     }
 
+    public function addnewMatiere(){
+        $conn = new SQLConnexion();
+        $req = $conn->conbdd()->prepare("INSERT INTO matiere (id_matiere, id_forme, longeur, largeur, epaisseur, diametre, hauteur)
+        VALUES ('materiau','forme','longueur','largeur','epaisseur','diametre','hauteur')");
+        $req->execute(['materiau' => $this->getRefMateriau(), 'forme' => $this->getRefForme(), 'longueur' => $this->getLongueur(), 'largeur' => $this->getLargeur(), 'epaisseur' => $this->getEpaisseur(), 'diametre' => $this->getDiametre(), 'hauteur' => $this->getHauteur()]);
+        header("Location: ../../../vue/main/gestionMatiere.php");
+    }
     public function addForme()
     {
 
@@ -377,7 +388,18 @@ class Matiere
         $requete->execute(['id' => $this->getClasse()]);
         $classe = $requete->fetch();
 
-        Mail::SENDMAIL($mail, "Devis " . $this->getNum(), "Nouvelle Commande de " . $user['nom'] . " " . $user['prenom'] . " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.");
+        $data = array(
+            array('Numéro de devis', 'Nom', 'Prénom', 'Classe', 'Matière', 'Quantité', 'Forme', 'Materiau'),
+            array($this->getNum(), $user['nom'], $user['prenom'], $classe['libelle'], $materiau, $this->getQuantite(), $forme, $materiau)
+        );
+
+        Mail::SENDMAIL ($mail, "Devis " . $this->getNum(), "Nouvelle Commande de " . $user['nom'] . " " . $user['prenom'] . " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.", $data);
+        Exel::createExel($this->getDate(), $this->getNum(), $this->getFournisseur(), $user['nom'], $user['prenom'], $mail, $classe['libelle']);
         header("Location: ../../../vue/main/commandeMatiere.php");
+        ob_end_flush();
+    }
+
+    public function ajouter {
+
     }
 }

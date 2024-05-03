@@ -3,6 +3,7 @@
 use matiere\Matiere;
 
 include "../../model/matiere/Matiere.php";
+include "../../model/bdd/SQLConnexion.php";
 if (array_key_exists("suppr", $_GET)) {
     $id = $_GET['id'];
 
@@ -63,6 +64,15 @@ if (array_key_exists("suppr", $_GET)) {
         'epaisseur' => $_GET['epaisseur'],
         'diametre' => $_GET['diametre']
     ]);
-}
 
-header('Location: ../../../vue/main/index.php');
+} else if (isset($_POST['addnewMatiere'])) {
+    // récupération des données du formulaire
+    $materiau = $_POST['materiau'];
+    $forme = $_POST['forme'];
+    $longueur = $_POST['longueur'];
+    $largeur = $_POST['largeur'];
+    $epaisseur = $_POST['epaisseur'];
+    $diametre = $_POST['diametre'];
+    $hauteur = $_POST['hauteur'];
+
+}

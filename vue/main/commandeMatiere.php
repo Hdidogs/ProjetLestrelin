@@ -1,3 +1,18 @@
+<?php
+include '../../src/bdd/SQLConnexion.php';
+
+session_start();
+$conn = new SQLConnexion();
+
+if (isset($_SESSION['id_user'])) {
+    $id_user = $_SESSION['id_user'];
+} else {
+    header("Location: connexion.html");
+}
+
+$reqU = $conn->conbdd()->query("SELECT * FROM user");
+$resU = $reqU->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -10,27 +25,16 @@
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../../assets/css/styles.css"/>
     <link rel="stylesheet" href="../../assets/css/IndexStyle.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- JavaScripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
-<?php
-include '../../src/bdd/SQLConnexion.php';
-
-session_start();
-$conn = new SQLConnexion();
-
-if (isset($_SESSION['id_user'])) {
-    $id_user = $_SESSION['id_user'];
-} else {
-    header("Location: connexion.html");
-}
-?>
-
 <div class="offcanvas offcanvas-start bg-body show visible" tabindex="-1" data-bs-backdrop="false" id="offcanvas-menu" style="width: 260px">
     <div class="offcanvas-header">
         <a class="link-body-emphasis d-flex align-items-center me-md-auto mb-3 mb-md-0 text-decoration-none" href="index.php">
@@ -287,16 +291,34 @@ if (isset($_SESSION['id_user'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
+                <button class="btn btn-success">Ajouter un utilisateur</button>
             </div>
+            <form action="../../src/controleur/user/TraitementUser.php" method="post">
+                <select id="admin" name="admin" required>
+                    <?php
+                    foreach ($resU as $user) {
+                        ?>
+                        <option value="<?=$user['id_user']?>"><?=$user['nom'] . " " . $user['prenom']?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+
+                <button class="btn btn-primary" type="submit" name="edit">Modifier</button>
+                <button class="btn btn-danger" type="submit" name="suppr">Supprimer</button>
+            </form>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal">Fermer</button>
+                <button class="btn btn-light" type="button" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    $('#admin').select2({
+        selectOnClose: true
+    });
+
     var modal = document.getElementById("modal-commande");
     var modalF = document.getElementById("modal-fournisseur");
 
