@@ -395,12 +395,8 @@ class Matiere
         );
 
         Mail::SENDMAIL ($mail, "Devis " . $this->getNum(), "Nouvelle Commande de " . $user['nom'] . " " . $user['prenom'] . " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.", $data);
-        Exel::createExel($this->getDate(), $this->getNum(), $this->getFournisseur(), $user['nom'], $user['prenom'], $mail, $classe['libelle']);
+        Exel::createExel($this->getDate(), $this->getNum(), $this->getFournisseur(), $user['nom'], $user['prenom'], $mail);
         header("Location: ../../../vue/main/commandeMatiere.php");
         ob_end_flush();
-    }
-
-    public function ajouter {
-
     }
 }
