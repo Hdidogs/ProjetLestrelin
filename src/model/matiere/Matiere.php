@@ -380,4 +380,8 @@ class Matiere
         Mail::SENDMAIL($mail, "Devis " . $this->getNum(), "Nouvelle Commande de " . $user['nom'] . " " . $user['prenom'] . " pour la classe " . $classe['libelle'] . ". Nous avons besoin de " . $forme . " " . $materiau . " de " . $this->getQuantite() . " mètres de long.");
         header("Location: ../../../vue/main/commandeMatiere.php");
     }
+
+    public function ajouter {
+        
+    }
 }
