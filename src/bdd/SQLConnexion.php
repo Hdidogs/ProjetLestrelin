@@ -9,7 +9,7 @@ class SQLConnexion
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $bddname = "sak_estrelin";
+        $bddname = "gestionstock";
 
         try {
             $this->conn = new PDO("mysql:host=$servername;dbname=" . $bddname, $username, $password);
