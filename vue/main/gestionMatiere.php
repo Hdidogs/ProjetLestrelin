@@ -160,7 +160,7 @@
             ?>
             <!-- Modals Formulaire -->
             <!-- Ajouter Matière -->
-            <div id="modal-ajouter" class="modal">
+            <div id="modal-ajouter" class="modalJS">
                 <form method="post" action="../php/matiere/traitementMatiere.php">
                     <div class="modal-header">
                         <h1>Ajouter</h1>
@@ -177,7 +177,7 @@
             </div>
 
             <!-- Nouvelle Forme -->
-            <div id="modal-nouvelle-forme" class="modal">
+            <div id="modal-nouvelle-forme" class="modalJS">
                 <form method="post" action="">
                     <div class="modal-header">
                         <h1>Nouvelle Forme</h1>
@@ -200,7 +200,7 @@
             </div>
 
             <!-- Nouveau Matériau -->
-            <div id="modal-nouveau-materiau" class="modal">
+            <div id="modal-nouveau-materiau" class="modalJS">
                 <form method="post" action="">
                     <div class="modal-header">
                         <h1>Nouveau Matériau</h1>
@@ -217,7 +217,7 @@
 
                     <!-- Modals -->
                     <!-- Ajouter Matière -->
-                    <div id="modal-ajouter" class="modal">
+                    <div id="modal-ajouter" class="modalJS">
                         <form method="post" action="../php/matiere/traitementMatiere.php">
                             <div class="modal-header">
                                 <h1>Ajouter</h1>
@@ -353,7 +353,6 @@
                             prefillFields();
                         }
                     </script>
-
 </body>
 
 </html>

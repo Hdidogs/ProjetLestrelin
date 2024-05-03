@@ -13,8 +13,8 @@
 
     <!-- JavaScripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 </head>
 <body>
@@ -78,7 +78,7 @@ if (isset($_SESSION['id_user'])) {
                     <?php
                     if ($_SESSION['fonction'] == 3) {
                         ?>
-                        <a class="dropdown-item" href="gestionUser.php">Gestion des Utilisateurs</a>
+                        <button class="btn" type="button"  data-bs-toggle="modal" data-bs-target="#gestion">Gestion Utilisateur</button>
                         <div class="dropdown-divider"></div>
                         <?php
                     }
@@ -113,6 +113,7 @@ if (isset($_SESSION['id_user'])) {
             <th>Classe</th>
             <th>Matière</th>
             <th>Fournisseur</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -168,6 +169,7 @@ if (isset($_SESSION['id_user'])) {
             $resultat = $requete->fetch();
             ?>
             <td><?= $resultat['entreprise'] ?></td>
+            <td><button type="button" class="btn btn-success">Reçu</button></td>
         </tr>
         <?php
         }
@@ -176,7 +178,7 @@ if (isset($_SESSION['id_user'])) {
     </table>
 </div>
 
-<div id="modal-fournisseur" class="modal">
+<div id="modal-fournisseur" class="modalJS">
     <form method="get" action="../../src/controleur/entreprise/TraitementEntreprise.php">
         <div class="modal-header">
             <h1>Nouveau Fournisseur</h1>
@@ -196,7 +198,7 @@ if (isset($_SESSION['id_user'])) {
     </form>
 </div>
 
-<div id="modal-commande" class="modal">
+<div id="modal-commande" class="modalJS">
     <form method="get" action="../../src/controleur/matiere/TraitementMatiere.php">
         <div class="modal-header">
             <h1>Nouvelle Commande</h1>
@@ -274,6 +276,24 @@ if (isset($_SESSION['id_user'])) {
             <button name="commande" type="submit">Commander</button>
         </div>
     </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="gestion" tabindex="-1" aria-labelledby="gestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="gestionModalLabel">Gestion Utilisateur</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

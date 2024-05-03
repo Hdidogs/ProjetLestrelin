@@ -166,7 +166,7 @@ if (isset($_SESSION['id_user'])) {
     </table>
 </div>
 
-<div id="modal-debit" class="modal">
+<div id="modal-debit" class="modalJS">
     <form method="get" action="../../src/controleur/matiere/TraitementMatiere.php">
         <div class="modal-header">
             <h1>Nouveau Débit</h1>
