@@ -28,6 +28,12 @@ class User
         }
     }
 
+    public static function DECONNEXION()
+    {
+        session_start();
+        session_destroy();
+    }
+
     public function getNom(): string
     {
         return $this->nom;
@@ -145,8 +151,7 @@ class User
         }
     }
 
-    public function checkIfMailExist(): bool
-    {
+    public function checkIfMailExist(): bool {
         $co = new SQLConnexion();
 
         $check_mail = $co->conbdd()->prepare("SELECT mail FROM user WHERE mail = :mail");

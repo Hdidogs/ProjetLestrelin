@@ -338,6 +338,13 @@ class Matiere
         header("Location: ../../../vue/main/debitMatiere.php");
     }
 
+    public function addnewMatiere(){
+        $conn = new SQLConnexion();
+        $req = $conn->conbdd()->prepare("INSERT INTO matiere (id_matiere, id_forme, longeur, largeur, epaisseur, diametre, hauteur)
+        VALUES ('materiau','forme','longueur','largeur','epaisseur','diametre','hauteur')");
+        $req->execute(['materiau' => $this->getRefMateriau(), 'forme' => $this->getRefForme(), 'longueur' => $this->getLongueur(), 'largeur' => $this->getLargeur(), 'epaisseur' => $this->getEpaisseur(), 'diametre' => $this->getDiametre(), 'hauteur' => $this->getHauteur()]);
+        header("Location: ../../../vue/main/gestionMatiere.php");
+    }
     public function addForme()
     {
 
@@ -390,5 +397,9 @@ class Matiere
         Exel::createExel($this->getDate(), $this->getNum(), $this->getFournisseur(), $user['nom'], $user['prenom'], $mail, $classe['libelle']);
         header("Location: ../../../vue/main/commandeMatiere.php");
         ob_end_flush();
+    }
+
+    public function ajouter {
+
     }
 }

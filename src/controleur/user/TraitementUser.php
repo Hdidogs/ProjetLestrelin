@@ -36,5 +36,8 @@ if (array_key_exists("connexion", $_POST)) {
     } else {
         header("Location: ../../../vue/main/connexion.html");
     }
+} else if (array_key_exists("deconnexion", $_POST)) {
+    User::DECONNEXION();
+    header("Location: ../../../vue/main/connexion.html");
 }
 ?>
