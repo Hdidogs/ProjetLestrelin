@@ -341,6 +341,7 @@ class Matiere
         $req->execute(['materiau' => $this->getRefMateriau(), 'forme' => $this->getRefForme(), 'longueur' => $this->getLongueur(), 'largeur' => $this->getLargeur(), 'epaisseur' => $this->getEpaisseur(), 'diametre' => $this->getDiametre(), 'hauteur' => $this->getHauteur()]);
         header("Location: ../../../vue/main/gestionMatiere.php");
     }
+    
     public function addForme()
     {
 
