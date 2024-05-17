@@ -196,6 +196,7 @@
             <?php
         }
         ?>
+    </div>
         <!-- Modals Formulaire -->
         <!-- Ajouter  -->
         <div id="modal-ajouter" class="modal">
@@ -231,27 +232,9 @@
                     <input type="text" name="diametre" placeholder="Diamètre">
                     <input type="text" name="hauteur" placeholder="Hauteur">
                 </div>
-<<<<<<< HEAD
-                <?php
-            }
-            ?>
-            <!-- Modals Formulaire -->
-            <!-- Ajouter Matière -->
-            <div id="modal-ajouter" class="modalJS">
-                <form method="post" action="../php/matiere/traitementMatiere.php">
-                    <div class="modal-header">
-                        <h1>Ajouter</h1>
-                        <span class="close-ajouter">&times;</span>
-                    </div>
-                    <div class="modal-content">
-                        <!-- Contenu du formulaire pour ajouter une matière -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="reset">Réinitialiser</button>
-                        <button name="add" type="submit">Ajouter</button>
-                    </div>
-                </form>
-            </div>
+            </form>
+        </div>
+
 
             <!-- Nouvelle Forme -->
             <div id="modal-nouvelle-forme" class="modalJS">
@@ -327,7 +310,6 @@
                                 <input type="text" name="diametre" placeholder="Diamètre">
                                 <input type="text" name="hauteur" placeholder="Hauteur">
                             </div>
-=======
                 <div class="modal-footer">
                     <button type="reset">Réinitialiser</button>
                     <button name="addnewMatiere" type="submit">Ajouter</button>
