@@ -196,6 +196,7 @@
             <?php
         }
         ?>
+    </div>
         <!-- Modals Formulaire -->
         <!-- Ajouter  -->
         <div id="modal-ajouter" class="modal">
@@ -231,6 +232,84 @@
                     <input type="text" name="diametre" placeholder="Diamètre">
                     <input type="text" name="hauteur" placeholder="Hauteur">
                 </div>
+            </form>
+        </div>
+
+
+            <!-- Nouvelle Forme -->
+            <div id="modal-nouvelle-forme" class="modalJS">
+                <form method="post" action="">
+                    <div class="modal-header">
+                        <h1>Nouvelle Forme</h1>
+                        <span class="close-nouvelle-forme">&times;</span>
+                    </div>
+                    <div class="modal-content">
+                        <!-- Contenu du formulaire pour ajouter une nouvelle forme -->
+                        <input type="text" name="libelle" placeholder="Nom de la forme">
+                        <input type="text" name="longueur" placeholder="Longueur">
+                        <input type="text" name="largeur" placeholder="Largeur">
+                        <input type="text" name="epaisseur" placeholder="Épaisseur">
+                        <input type="text" name="diametre" placeholder="Diamètre">
+                        <input type="text" name="hauteur" placeholder="Hauteur">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset">Réinitialiser</button>
+                        <button name="addForme" type="submit">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Nouveau Matériau -->
+            <div id="modal-nouveau-materiau" class="modalJS">
+                <form method="post" action="">
+                    <div class="modal-header">
+                        <h1>Nouveau Matériau</h1>
+                        <span class="close-nouveau-materiau">&times;</span>
+                    </div>
+                    <div class="modal-content">
+                        <input type="text" name="libelleMateriau" placeholder="Libellé">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset">Réinitialiser</button>
+                        <button name="addMateriau" type="submit">Ajouter</button>
+                    </div>
+
+
+                    <!-- Modals -->
+                    <!-- Ajouter Matière -->
+                    <div id="modal-ajouter" class="modalJS">
+                        <form method="post" action="../php/matiere/traitementMatiere.php">
+                            <div class="modal-header">
+                                <h1>Ajouter</h1>
+                                <span class="close-ajouter">&times;</span>
+                            </div>
+                            <div class="modal-content">
+                                <select name="materiau" id="materiau">
+                                    <option value="">Sélectionner un matériau</option>
+                                    <?php
+                                    $requete = $conn->conbdd()->query("SELECT * FROM materiau");
+                                    $result = $requete->fetchAll();
+                                    foreach ($result as $materiau) {
+                                        echo "<option value='" . $materiau['id_materiau'] . "'>" . $materiau['libelle'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <select name="forme" id="forme">
+                                    <option value="">Sélectionner une forme</option>
+                                    <?php
+                                    $requete = $conn->conbdd()->query("SELECT * FROM forme");
+                                    $result = $requete->fetchAll();
+                                    foreach ($result as $forme) {
+                                        echo "<option value='" . $forme['id_forme'] . "'>" . $forme['libelle'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <input type="text" name="longueur" placeholder="Longueur">
+                                <input type="text" name="largeur" placeholder="Largeur">
+                                <input type="text" name="epaisseur" placeholder="Épaisseur">
+                                <input type="text" name="diametre" placeholder="Diamètre">
+                                <input type="text" name="hauteur" placeholder="Hauteur">
+                            </div>
                 <div class="modal-footer">
                     <button type="reset">Réinitialiser</button>
                     <button name="addnewMatiere" type="submit">Ajouter</button>
@@ -311,6 +390,7 @@
                             <input type="text" name="epaisseur" placeholder="Épaisseur">
                             <input type="text" name="diametre" placeholder="Diamètre">
                             <input type="text" name="hauteur" placeholder="Hauteur" </div>
+>>>>>>> 5a0d7e6c12d1e0d867439f3c32b3dbb1c1cf68e6
                             <div class="modal-footer">
                                 <button type="reset">Réinitialiser</button>
                                 <button name="add" type="submit">Ajouter</button>
@@ -409,12 +489,20 @@
         // Fonction pour préremplir les champs texte lors du clic sur le bouton "Modifier"
 
 
+<<<<<<< HEAD
+                        // Appeler la fonction pour préremplir les champs texte lors du chargement de la page
+                        window.onload = function () {
+                            prefillFields();
+                        }
+                    </script>
+=======
         // Appeler la fonction pour préremplir les champs texte lors du chargement de la page
         window.onload = function () {
             prefillFields();
         }
     </script>
 
+>>>>>>> 5a0d7e6c12d1e0d867439f3c32b3dbb1c1cf68e6
 </body>
 
 </html>
