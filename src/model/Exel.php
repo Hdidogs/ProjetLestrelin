@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../vendor/phpoffice/phpspreadsheet/src/Bootstrap.php
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Exel
 {
-    public static function createExel($date,$num,$fournisseur,$nom,$prenom,$mail,$adresse): void
+    public static function createExel($date,$num,$fournisseur,$nom,$prenom,$mail): void
     {
         $scriptPath = dirname(__FILE__);
         $exelFilePath = $scriptPath . '/../../assets/exel/Bon de Commande.xlsx';
@@ -17,7 +17,6 @@ class Exel
         $sheet->setCellValue('B6' , $nom);
         $sheet->setCellValue('B6' , $prenom);
         $sheet->setCellValue('B7' , $mail);
-        $sheet->setCellValue('G6' , $adresse);
 
         $writer = new Xlsx($spreadsheet);
         $writer->save($scriptPath . '/../../assets/exel/Bon de Commande' . " " .$date . '.xlsx');
